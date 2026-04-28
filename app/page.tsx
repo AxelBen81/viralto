@@ -60,10 +60,10 @@ export default function Home() {
           IA générative
         </div>
         <h1 className="text-4xl font-medium text-gray-900 mb-4 leading-tight">
-          Colle ta vidéo, tout le reste<br />on s'en occupe.
+          Colle ta vidéo, tout le reste<br />on s&apos;en occupe.
         </h1>
         <p className="text-gray-500 mb-10">
-          Transforme n'importe quelle vidéo en kit de contenu prêt à publier.
+          Transforme n&apos;importe quelle vidéo en kit de contenu prêt à publier.
         </p>
 
         <div className="flex gap-3 max-w-lg mx-auto mb-3">
