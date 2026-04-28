@@ -48,7 +48,7 @@ export default function Home() {
       <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
         <span className="text-lg font-medium">Viralto</span>
         <div className="flex items-center gap-6">
-          <span className="text-sm text-gray-500 cursor-pointer">Comment ça marche</span>
+          <a href="/how-it-works" className="text-sm text-gray-500">Comment ça marche</a>
           <span className="text-sm text-gray-500 cursor-pointer">Tarifs</span>
           <button className="text-sm font-medium text-blue-600">Se connecter</button>
         </div>
