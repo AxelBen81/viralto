@@ -49,7 +49,7 @@ export default function Home() {
         <span className="text-lg font-medium">Viralto</span>
         <div className="flex items-center gap-6">
           <a href="/how-it-works" className="text-sm text-gray-500">Comment ça marche</a>
-          <span className="text-sm text-gray-500 cursor-pointer">Tarifs</span>
+          <a href="/pricing" className="text-sm text-gray-500">Tarifs</a>
           <button className="text-sm font-medium text-blue-600">Se connecter</button>
         </div>
       </nav>
