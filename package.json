@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "dependencies": {
+ "dependencies": {
+    "@clerk/nextjs": "^5.0.0",
+    "@types/node": "20.6.2",
     "@types/node": "20.6.2",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
