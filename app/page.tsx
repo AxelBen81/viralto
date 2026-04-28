@@ -51,7 +51,14 @@ export default function Home() {
         <div className="flex items-center gap-6">
           <a href="/how-it-works" className="text-sm text-gray-500">Comment ça marche</a>
           <a href="/pricing" className="text-sm text-gray-500">Tarifs</a>
-          <button className="text-sm font-medium text-blue-600">Se connecter</button>
+          <SignedOut>
+  <SignInButton mode="modal">
+    <button className="text-sm font-medium text-blue-600">Se connecter</button>
+  </SignInButton>
+</SignedOut>
+<SignedIn>
+  <UserButton />
+</SignedIn>
         </div>
       </nav>
 
