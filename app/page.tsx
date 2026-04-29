@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton as ClerkSignInButton } from "@clerk/nextjs";
 
 const fakeContent = {
   caption: `🎯 Tu pensais que c'était impossible ? Regarde ça.\n\nOn a testé cette méthode pendant 30 jours et les résultats sont dingues. Voici ce qu'on a appris :\n\n✅ Astuce 1 — Commence tôt le matin\n✅ Astuce 2 — Reste consistant\n✅ Astuce 3 — Mesure tout\n\nSauve ce post pour y revenir plus tard 👇\n\n#growth #creator #conseils`,
@@ -22,18 +23,24 @@ const proFormats = [
 ];
 
 export default function Home() {
+  const { isSignedIn } = useUser();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [copied, setCopied] = useState("");
+  const [generations, setGenerations] = useState(0);
+  const MAX_FREE = 3;
 
-  async function handleGenerate() {
+async function handleGenerate() {
     if (!url) return;
+    if (!isSignedIn) return;
+    if (generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
     await new Promise((r) => setTimeout(r, 2000));
     setLoading(false);
     setGenerated(true);
+    setGenerations(generations + 1);
   }
 
   function handleCopy(key: string, text: string) {
@@ -82,13 +89,27 @@ export default function Home() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button
-            onClick={handleGenerate}
-            disabled={loading || !url}
-            className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium disabled:opacity-50"
-          >
-            {loading ? "Génération..." : "Générer"}
-          </button>
+         {!isSignedIn ? (
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium">
+                  Se connecter pour générer
+                </button>
+              </SignInButton>
+            </SignedOut>
+          ) : generations >= MAX_FREE ? (
+            <button className="bg-gray-200 text-gray-500 px-6 py-3 rounded-xl text-sm font-medium cursor-not-allowed">
+              Limite atteinte
+            </button>
+          ) : (
+            <button
+              onClick={handleGenerate}
+              disabled={loading || !url}
+              className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium disabled:opacity-50"
+            >
+              {loading ? "Génération..." : "Générer"}
+            </button>
+          )}
         </div>
         <p className="text-xs text-gray-400">Fonctionne avec YouTube, TikTok et Instagram Reels</p>
       </section>
@@ -139,7 +160,9 @@ export default function Home() {
 
         {/* Barre du bas */}
         <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
-          <span className="text-xs text-gray-400">Plan gratuit — 3 générations restantes</span>
+        <span className="text-xs text-gray-400">
+  Plan gratuit — {MAX_FREE - generations} génération{MAX_FREE - generations > 1 ? "s" : ""} restante{MAX_FREE - generations > 1 ? "s" : ""}
+</span>
           <button className="text-xs font-medium text-blue-600">Passer à Pro →</button>
         </div>
       </section>
