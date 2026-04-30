@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { SignInButton as ClerkSignInButton } from "@clerk/nextjs";
 
@@ -23,7 +23,7 @@ const proFormats = [
 ];
 
 export default function Home() {
-  const { isSignedIn } = useUser();
+ const { isSignedIn, user } = useUser();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
@@ -31,13 +31,27 @@ export default function Home() {
   const [generations, setGenerations] = useState(0);
   const MAX_FREE = 3;
 
+  useEffect(() => {
+    if (isSignedIn && user) {
+      fetch(`/api/generations?userId=${user.id}`)
+        .then((res) => res.json())
+        .then((data) => setGenerations(data.count));
+    }
+  }, [isSignedIn, user]);
+
 async function handleGenerate() {
-    if (!url) return;
-    if (!isSignedIn) return;
+    if (!url || !isSignedIn || !user) return;
     if (generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
     await new Promise((r) => setTimeout(r, 2000));
+
+    await fetch("/api/generations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user.id }),
+    });
+
     setLoading(false);
     setGenerated(true);
     setGenerations(generations + 1);
