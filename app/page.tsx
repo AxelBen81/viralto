@@ -57,12 +57,6 @@ async function handleGenerate() {
     setGenerations(generations + 1);
   }
 
-  function handleCopy(key: string, text: string) {
-    navigator.clipboard.writeText(text);
-    setCopied(key);
-    setTimeout(() => setCopied(""), 2000);
-  }
-
   return (
     <main className="min-h-screen bg-white">
 
