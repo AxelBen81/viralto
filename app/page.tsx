@@ -151,10 +151,10 @@ async function handleGenerate() {
               {generated ? (
                 <div className="relative">
                   <pre className="text-xs text-gray-600 whitespace-pre-wrap bg-white border border-gray-100 rounded-lg p-3 max-h-40 overflow-y-auto">
-                    {fakeContent[f.key as keyof typeof fakeContent]}
+                    {generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent]}
                   </pre>
                   <button
-                    onClick={() => handleCopy(f.key, fakeContent[f.key as keyof typeof fakeContent])}
+                    onClick={() => handleCopy(f.key, generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent])}
                     className="mt-2 text-xs text-blue-600 font-medium"
                   >
                     {copied === f.key ? "✅ Copié !" : "Copier"}
