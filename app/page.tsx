@@ -45,6 +45,11 @@ async function handleGenerate() {
     if (generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
+  function handleCopy(key: string, text: string) {
+    navigator.clipboard.writeText(text);
+    setCopied(key);
+    setTimeout(() => setCopied(""), 2000);
+  }
 
     try {
       const res = await fetch("/api/generate", {
