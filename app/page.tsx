@@ -30,6 +30,7 @@ export default function Home() {
   const [copied, setCopied] = useState("");
   const [generations, setGenerations] = useState(0);
   const MAX_FREE = 3;
+  const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({})
 
   useEffect(() => {
     if (isSignedIn && user) {
