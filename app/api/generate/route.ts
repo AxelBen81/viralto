@@ -44,3 +44,4 @@ Génère exactement ce JSON (sans markdown, sans backticks) :
     return NextResponse.json({ error: "Erreur parsing" }, { status: 500 });
   }
 }
+
