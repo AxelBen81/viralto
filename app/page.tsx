@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
-import { SignInButton as ClerkSignInButton } from "@clerk/nextjs";
 
 const fakeContent = {
   caption: `🎯 Tu pensais que c'était impossible ? Regarde ça.\n\nOn a testé cette méthode pendant 30 jours et les résultats sont dingues. Voici ce qu'on a appris :\n\n✅ Astuce 1 — Commence tôt le matin\n✅ Astuce 2 — Reste consistant\n✅ Astuce 3 — Mesure tout\n\nSauve ce post pour y revenir plus tard 👇\n\n#growth #creator #conseils`,
@@ -23,14 +22,14 @@ const proFormats = [
 ];
 
 export default function Home() {
- const { isSignedIn, user } = useUser();
+  const { isSignedIn, user } = useUser();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [copied, setCopied] = useState("");
   const [generations, setGenerations] = useState(0);
+  const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({});
   const MAX_FREE = 3;
-  const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({})
 
   useEffect(() => {
     if (isSignedIn && user) {
@@ -40,16 +39,17 @@ export default function Home() {
     }
   }, [isSignedIn, user]);
 
-async function handleGenerate() {
-    if (!url || !isSignedIn || !user) return;
-    if (generations >= MAX_FREE) return;
-    setLoading(true);
-    setGenerated(false);
   function handleCopy(key: string, text: string) {
     navigator.clipboard.writeText(text);
     setCopied(key);
     setTimeout(() => setCopied(""), 2000);
   }
+
+  async function handleGenerate() {
+    if (!url || !isSignedIn || !user) return;
+    if (generations >= MAX_FREE) return;
+    setLoading(true);
+    setGenerated(false);
 
     try {
       const res = await fetch("/api/generate", {
@@ -87,13 +87,13 @@ async function handleGenerate() {
           <a href="/how-it-works" className="text-sm text-gray-500">Comment ça marche</a>
           <a href="/pricing" className="text-sm text-gray-500">Tarifs</a>
           <SignedOut>
-  <SignInButton mode="modal">
-    <button className="text-sm font-medium text-blue-600">Se connecter</button>
-  </SignInButton>
-</SignedOut>
-<SignedIn>
-  <UserButton />
-</SignedIn>
+            <SignInButton mode="modal">
+              <button className="text-sm font-medium text-blue-600">Se connecter</button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </nav>
 
@@ -117,7 +117,7 @@ async function handleGenerate() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-         {!isSignedIn ? (
+          {!isSignedIn ? (
             <SignedOut>
               <SignInButton mode="modal">
                 <button className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-medium">
@@ -188,9 +188,9 @@ async function handleGenerate() {
 
         {/* Barre du bas */}
         <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
-        <span className="text-xs text-gray-400">
-  Plan gratuit — {MAX_FREE - generations} génération{MAX_FREE - generations > 1 ? "s" : ""} restante{MAX_FREE - generations > 1 ? "s" : ""}
-</span>
+          <span className="text-xs text-gray-400">
+            Plan gratuit — {MAX_FREE - generations} génération{MAX_FREE - generations > 1 ? "s" : ""} restante{MAX_FREE - generations > 1 ? "s" : ""}
+          </span>
           <button className="text-xs font-medium text-blue-600">Passer à Pro →</button>
         </div>
       </section>
