@@ -44,17 +44,31 @@ async function handleGenerate() {
     if (generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
-    await new Promise((r) => setTimeout(r, 2000));
 
-    await fetch("/api/generations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.id }),
-    });
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ transcript: url }),
+      });
 
-    setLoading(false);
-    setGenerated(true);
-    setGenerations(generations + 1);
+      const data = await res.json();
+
+      if (data.caption) setGeneratedContent(data);
+
+      await fetch("/api/generations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id }),
+      });
+
+      setGenerations(generations + 1);
+      setGenerated(true);
+    } catch {
+      console.error("Erreur génération");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
