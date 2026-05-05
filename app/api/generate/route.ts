@@ -39,7 +39,3 @@ Réponds UNIQUEMENT avec ce JSON exact, sans backticks, sans markdown :
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
-    return NextResponse.json({ error: "Erreur parsing" }, { status: 500 });
-  }
-}
-
