@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
-import Image from "next/image";
 
 const fakeContent = {
   caption: `🎯 Tu pensais que c'était impossible ? Regarde ça.\n\nOn a testé cette méthode pendant 30 jours et les résultats sont dingues. Voici ce qu'on a appris :\n\n✅ Astuce 1 — Commence tôt le matin\n✅ Astuce 2 — Reste consistant\n✅ Astuce 3 — Mesure tout\n\nSauve ce post pour y revenir plus tard 👇\n\n#growth #creator #conseils`,
@@ -11,10 +10,10 @@ const fakeContent = {
 };
 
 const formats = [
-  { key: "caption", label: "Caption Instagram", desc: "Hook · corps · CTA · emojis", icon: "ig", bg: "rgba(55,138,221,0.15)", color: "#85B7EB" },
-  { key: "tiktok", label: "Script TikTok", desc: "Hook 3s · narration · fin", icon: "tt", bg: "rgba(226,75,74,0.15)", color: "#F09595" },
-  { key: "thread", label: "Thread X", desc: "5 tweets enchaînés", icon: "x", bg: "rgba(99,153,34,0.15)", color: "#C0DD97" },
-  { key: "email", label: "Email newsletter", desc: "Objet · corps · CTA", icon: "@", bg: "rgba(186,117,23,0.15)", color: "#FAC775" },
+  { key: "caption", label: "Caption Instagram", desc: "Hook · corps · CTA · emojis", icon: "ig", bg: "rgba(55,138,221,0.2)", color: "#85B7EB" },
+  { key: "tiktok", label: "Script TikTok", desc: "Hook 3s · narration · fin", icon: "tt", bg: "rgba(226,75,74,0.2)", color: "#F09595" },
+  { key: "thread", label: "Thread X", desc: "5 tweets enchaînés", icon: "x", bg: "rgba(99,153,34,0.2)", color: "#C0DD97" },
+  { key: "email", label: "Email newsletter", desc: "Objet · corps · CTA", icon: "@", bg: "rgba(186,117,23,0.2)", color: "#FAC775" },
 ];
 
 const proFormats = [
@@ -51,23 +50,19 @@ export default function Home() {
     if (generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
-
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ transcript: url }),
       });
-
       const data = await res.json();
       if (data.caption) setGeneratedContent(data);
-
       await fetch("/api/generations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: user.id }),
       });
-
       setGenerations(generations + 1);
       setGenerated(true);
     } catch {
@@ -78,28 +73,34 @@ export default function Home() {
   }
 
   return (
-    <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "sans-serif", position: "relative", overflow: "hidden" }}>
+    <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
-      {/* Glows */}
-      <div style={{ position: "absolute", top: -100, left: -100, width: 400, height: 400, background: "radial-gradient(circle, rgba(55,138,221,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: -80, right: -80, width: 350, height: 350, background: "radial-gradient(circle, rgba(83,74,183,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
+      {/* Glow effects */}
+      <div style={{ position: "fixed", top: -200, left: -200, width: 600, height: 600, background: "radial-gradient(circle, rgba(55,138,221,0.2) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", top: -150, right: -150, width: 500, height: 500, background: "radial-gradient(circle, rgba(83,74,183,0.18) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", bottom: -100, left: "30%", width: 400, height: 400, background: "radial-gradient(circle, rgba(55,138,221,0.08) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
 
-      {/* Grid */}
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
+      {/* Grid background */}
+      <div style={{ position: "fixed", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "50px 50px", pointerEvents: "none", zIndex: 0 }} />
 
       <div style={{ position: "relative", zIndex: 1 }}>
 
         {/* Navbar */}
-        <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 28px", borderBottom: "0.5px solid rgba(255,255,255,0.06)" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Image src="/LOGO_VIRALTO.png" alt="Viralto" width={140} height={35} style={{ objectFit: "contain" }} />
+        <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 48px", borderBottom: "1px solid rgba(255,255,255,0.06)", backdropFilter: "blur(12px)", background: "rgba(8,11,20,0.8)" }}>
+          {/* Logo text */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ width: 32, height: 32, background: "linear-gradient(135deg, #378ADD, #534AB7)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "white", fontWeight: 700, fontSize: 16 }}>V</span>
+            </div>
+            <span style={{ fontSize: 20, fontWeight: 600, color: "white", letterSpacing: -0.5 }}>VIRALTO</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            <a href="/how-it-works" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Comment ça marche</a>
-            <a href="/pricing" style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>Tarifs</a>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            <a href="/how-it-works" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none", fontWeight: 400 }}>Comment ça marche</a>
+            <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none", fontWeight: 400 }}>Tarifs</a>
             <SignedOut>
               <SignInButton mode="modal">
-                <button style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", background: "transparent", border: "0.5px solid rgba(255,255,255,0.15)", padding: "7px 16px", borderRadius: 20, cursor: "pointer" }}>
+                <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
                   Se connecter
                 </button>
               </SignInButton>
@@ -111,93 +112,96 @@ export default function Home() {
         </nav>
 
         {/* Hero */}
-        <section style={{ maxWidth: 680, margin: "0 auto", padding: "80px 24px 48px", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "0.5px solid rgba(55,138,221,0.25)", padding: "5px 12px", borderRadius: 20, marginBottom: 24 }}>
-            <div style={{ width: 5, height: 5, background: "#378ADD", borderRadius: "50%" }} />
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "100px 48px 60px", textAlign: "center" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "6px 16px", borderRadius: 24, marginBottom: 32 }}>
+            <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
             Propulsé par Claude AI
           </div>
-          <h1 style={{ fontSize: 46, fontWeight: 500, lineHeight: 1.15, marginBottom: 18, letterSpacing: -1 }}>
+
+          <h1 style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, marginBottom: 24, letterSpacing: -2 }}>
             Colle ta vidéo,{" "}
             <span style={{ background: "linear-gradient(135deg, #378ADD, #AFA9EC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               tout le reste
             </span>
             <br />on s&apos;en occupe.
           </h1>
-          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, marginBottom: 40, maxWidth: 460, margin: "0 auto 40px" }}>
+
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 48, maxWidth: 560, margin: "0 auto 48px" }}>
             Transforme n&apos;importe quelle vidéo en kit de contenu complet — caption Instagram, script TikTok, thread X et email en 30 secondes.
           </p>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 520, margin: "0 auto 14px", background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 50, padding: "6px 6px 6px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 600, margin: "0 auto 16px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 50, padding: "8px 8px 8px 24px" }}>
             <input
               type="text"
               placeholder="Colle ton lien YouTube ou TikTok..."
-              style={{ flex: 1, border: "none", background: "transparent", fontSize: 13, color: "white", outline: "none" }}
+              style={{ flex: 1, border: "none", background: "transparent", fontSize: 15, color: "white", outline: "none" }}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
             {!isSignedIn ? (
               <SignedOut>
                 <SignInButton mode="modal">
-                  <button style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "10px 22px", borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
+                  <button style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap" }}>
                     Se connecter →
                   </button>
                 </SignInButton>
               </SignedOut>
             ) : generations >= MAX_FREE ? (
-              <button style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)", border: "none", padding: "10px 22px", borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: "not-allowed", whiteSpace: "nowrap" }}>
+              <button style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "not-allowed", whiteSpace: "nowrap" }}>
                 Limite atteinte
               </button>
             ) : (
               <button
                 onClick={handleGenerate}
                 disabled={loading || !url}
-                style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "10px 22px", borderRadius: 50, fontSize: 13, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap", opacity: loading || !url ? 0.5 : 1 }}
+                style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, fontWeight: 500, cursor: "pointer", whiteSpace: "nowrap", opacity: loading || !url ? 0.5 : 1 }}
               >
                 {loading ? "Génération..." : "Générer →"}
               </button>
             )}
           </div>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)" }}>YouTube · TikTok · Instagram Reels</p>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.2)" }}>YouTube · TikTok · Instagram Reels</p>
         </section>
 
         {/* Stats */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 40, padding: "24px", borderTop: "0.5px solid rgba(255,255,255,0.05)", borderBottom: "0.5px solid rgba(255,255,255,0.05)", margin: "0 24px" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: 64, padding: "32px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0 48px" }}>
           {[["4", "formats générés"], ["30s", "temps moyen"], ["100%", "basé sur ta vidéo"]].map(([num, label]) => (
             <div key={label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 24, fontWeight: 500, color: "white" }}>{num}</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", marginTop: 3 }}>{label}</div>
+              <div style={{ fontSize: 32, fontWeight: 600, color: "white", letterSpacing: -1 }}>{num}</div>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 4 }}>{label}</div>
             </div>
           ))}
         </div>
 
         {/* Formats */}
-        <section style={{ maxWidth: 680, margin: "0 auto", padding: "28px 24px 32px" }}>
-          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>Contenu généré</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
+        <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 48px 48px" }}>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
             {formats.map((f) => (
-              <div key={f.key} style={{ background: "rgba(255,255,255,0.03)", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 7, background: f.bg, color: f.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 500 }}>
+              <div key={f.key} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: f.bg, color: f.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
                       {f.icon}
                     </div>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.85)" }}>{f.label}</span>
+                    <span style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.9)" }}>{f.label}</span>
                   </div>
                   {generated && (
-                    <button onClick={() => handleCopy(f.key, generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent])} style={{ fontSize: 11, color: "#85B7EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>
+                    <button onClick={() => handleCopy(f.key, generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent])} style={{ fontSize: 12, color: "#85B7EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>
                       {copied === f.key ? "✅ Copié !" : "Copier"}
                     </button>
                   )}
                 </div>
-                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", marginBottom: 10 }}>{f.desc}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginBottom: 12 }}>{f.desc}</p>
                 {generated ? (
-                  <pre style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "0.5px solid rgba(255,255,255,0.06)", borderRadius: 8, padding: 12, maxHeight: 160, overflowY: "auto" }}>
+                  <pre style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: 14, maxHeight: 180, overflowY: "auto", margin: 0 }}>
                     {generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent]}
                   </pre>
                 ) : (
                   <div>
-                    <div style={{ height: 5, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 5 }} />
-                    <div style={{ height: 5, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "55%" }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 6 }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "60%", marginBottom: 6 }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "40%" }} />
                   </div>
                 )}
               </div>
@@ -205,30 +209,30 @@ export default function Home() {
           </div>
 
           {/* Pro formats */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, marginTop: 10 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 16 }}>
             {proFormats.map((f) => (
-              <div key={f.label} style={{ background: "rgba(255,255,255,0.02)", border: "0.5px solid rgba(255,255,255,0.05)", borderRadius: 12, padding: 16, opacity: 0.3 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 7, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11 }}>
+              <div key={f.label} style={{ background: "rgba(255,255,255,0.015)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 16, padding: 20, opacity: 0.35 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>
                       {f.icon}
                     </div>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>{f.label}</span>
+                    <span style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>{f.label}</span>
                   </div>
-                  <span style={{ fontSize: 10, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "2px 8px", borderRadius: 4, fontWeight: 500 }}>Pro</span>
+                  <span style={{ fontSize: 11, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "3px 10px", borderRadius: 6, fontWeight: 500 }}>Pro</span>
                 </div>
-                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)" }}>{f.desc}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.25)" }}>{f.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Bottom bar */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 24px", borderTop: "0.5px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)" }}>
-          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
+          <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
             Plan gratuit · {MAX_FREE - generations} génération{MAX_FREE - generations > 1 ? "s" : ""} restante{MAX_FREE - generations > 1 ? "s" : ""} ce mois
           </span>
-          <a href="/pricing" style={{ fontSize: 12, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "7px 16px", borderRadius: 20, textDecoration: "none" }}>
+          <a href="/pricing" style={{ fontSize: 13, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "10px 20px", borderRadius: 24, textDecoration: "none" }}>
             Passer à Pro →
           </a>
         </div>
