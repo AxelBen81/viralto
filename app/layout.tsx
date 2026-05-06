@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Viralto",
   description: "Colle ta vidéo, tout le reste on s'en occupe.",
+  icons: {
+    icon: "/Favicon_Viralto.png",
+  },
 };
 
 export default function RootLayout({
