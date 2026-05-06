@@ -1,4 +1,32 @@
+"use client";
+import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+
 export default function Pricing() {
+  const { user, isSignedIn } = useUser();
+  const [loading, setLoading] = useState(false);
+
+  async function handleUpgrade() {
+    if (!isSignedIn || !user) {
+      window.location.href = "/";
+      return;
+    }
+
+    setLoading(true);
+    const res = await fetch("/api/stripe/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: user.id,
+        email: user.emailAddresses[0]?.emailAddress,
+      }),
+    });
+
+    const data = await res.json();
+    if (data.url) window.location.href = data.url;
+    setLoading(false);
+  }
+
   return (
     <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
@@ -101,9 +129,13 @@ export default function Pricing() {
                 ))}
               </div>
 
-              <a href="/" style={{ display: "block", textAlign: "center", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "14px", borderRadius: 12, fontSize: 15, textDecoration: "none", fontWeight: 500 }}>
-                Passer à Pro
-              </a>
+              <button
+                onClick={handleUpgrade}
+                disabled={loading}
+                style={{ display: "block", width: "100%", textAlign: "center", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "14px", borderRadius: 12, fontSize: 15, fontWeight: 500, border: "none", cursor: "pointer", opacity: loading ? 0.7 : 1 }}
+              >
+                {loading ? "Chargement..." : "Passer à Pro →"}
+              </button>
             </div>
           </div>
 
@@ -124,7 +156,6 @@ export default function Pricing() {
             </div>
           </div>
         </section>
-
       </div>
     </main>
   );
