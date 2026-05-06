@@ -25,3 +25,14 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+@media (max-width: 768px) {
+  nav { padding: 0px 20px !important; }
+  nav img { height: 100px !important; }
+  nav div { gap: 12px !important; }
+  nav a { font-size: 13px !important; }
+  section { padding: 40px 20px 32px !important; }
+  h1 { font-size: 36px !important; letter-spacing: -1px !important; }
+  p { font-size: 15px !important; }
+  .stats { gap: 24px !important; margin: 0 16px !important; }
+  .formats { grid-template-columns: 1fr !important; }
+}
