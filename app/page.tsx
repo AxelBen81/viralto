@@ -89,10 +89,7 @@ export default function Home() {
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 48px", borderBottom: "1px solid rgba(255,255,255,0.06)", backdropFilter: "blur(12px)", background: "rgba(8,11,20,0.8)" }}>
           {/* Logo text */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 32, height: 32, background: "linear-gradient(135deg, #378ADD, #534AB7)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "white", fontWeight: 700, fontSize: 16 }}>V</span>
-            </div>
-            <span style={{ fontSize: 20, fontWeight: 600, color: "white", letterSpacing: -0.5 }}>VIRALTO</span>
+           <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 36, width: "auto", objectFit: "contain" }} />
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
