@@ -89,7 +89,7 @@ export default function Home() {
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 48px", borderBottom: "1px solid rgba(255,255,255,0.06)", backdropFilter: "blur(12px)", background: "rgba(8,11,20,0.8)" }}>
           {/* Logo text */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-         <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 80, width: "auto", objectFit: "contain" }} />
+        <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 120, width: "auto", objectFit: "contain" }} />
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
