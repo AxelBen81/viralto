@@ -76,9 +76,9 @@ export default function Home() {
     <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
       {/* Glow effects */}
-      <div style={{ position: "fixed", top: -200, left: -200, width: 600, height: 600, background: "radial-gradient(circle, rgba(55,138,221,0.2) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-      <div style={{ position: "fixed", top: -150, right: -150, width: 500, height: 500, background: "radial-gradient(circle, rgba(83,74,183,0.18) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-      <div style={{ position: "fixed", bottom: -100, left: "30%", width: 400, height: 400, background: "radial-gradient(circle, rgba(55,138,221,0.08) 0%, transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+     <div style={{ position: "fixed", top: -150, left: -150, width: 700, height: 700, background: "radial-gradient(circle, rgba(55,138,221,0.35) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
+<div style={{ position: "fixed", top: -100, right: -100, width: 600, height: 600, background: "radial-gradient(circle, rgba(83,74,183,0.3) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
+<div style={{ position: "fixed", bottom: -50, left: "25%", width: 500, height: 500, background: "radial-gradient(circle, rgba(55,138,221,0.15) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
 
       {/* Grid background */}
       <div style={{ position: "fixed", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "50px 50px", pointerEvents: "none", zIndex: 0 }} />
