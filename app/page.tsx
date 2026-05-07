@@ -30,30 +30,29 @@ export default function Home() {
   const [generations, setGenerations] = useState(0);
   const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({});
   const MAX_FREE = 3;
-const [isPro, setIsPro] = useState(false);
+  const [isPro, setIsPro] = useState(false);
 
- useEffect(() => {
-  if (isSignedIn && user) {
-    fetch(`/api/generations?userId=${user.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setGenerations(data.count);
-        setIsPro(data.is_pro ?? false);
+  useEffect(() => {
+    if (isSignedIn && user) {
+      fetch(`/api/generations?userId=${user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setGenerations(data.count);
+          setIsPro(data.is_pro ?? false);
+          if (data.count === 0) {
+            fetch("/api/welcome", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: user.primaryEmailAddress?.emailAddress,
+                firstName: user.firstName,
+              }),
+            });
+          }
+        });
+    }
+  }, [isSignedIn, user]);
 
-      // Email de bienvenue si première fois
-if (data.count === 0) {
-          fetch("/api/welcome", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: user.primaryEmailAddress?.emailAddress,
-              firstName: user.firstName,
-            }),
-          });
-        }
-      });
-  }
-}, [isSignedIn, user]);
   function handleCopy(key: string, text: string) {
     navigator.clipboard.writeText(text);
     setCopied(key);
@@ -91,9 +90,9 @@ if (data.count === 0) {
     <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
       {/* Glow effects */}
-     <div style={{ position: "fixed", top: -150, left: -150, width: 700, height: 700, background: "radial-gradient(circle, rgba(55,138,221,0.35) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
-<div style={{ position: "fixed", top: -100, right: -100, width: 600, height: 600, background: "radial-gradient(circle, rgba(83,74,183,0.3) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
-<div style={{ position: "fixed", bottom: -50, left: "25%", width: 500, height: 500, background: "radial-gradient(circle, rgba(55,138,221,0.15) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", top: -150, left: -150, width: 700, height: 700, background: "radial-gradient(circle, rgba(55,138,221,0.35) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", top: -100, right: -100, width: 600, height: 600, background: "radial-gradient(circle, rgba(83,74,183,0.3) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", bottom: -50, left: "25%", width: 500, height: 500, background: "radial-gradient(circle, rgba(55,138,221,0.15) 0%, transparent 60%)", pointerEvents: "none", zIndex: 0 }} />
 
       {/* Grid background */}
       <div style={{ position: "fixed", inset: 0, backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "50px 50px", pointerEvents: "none", zIndex: 0 }} />
@@ -101,27 +100,27 @@ if (data.count === 0) {
       <div style={{ position: "relative", zIndex: 1 }}>
 
         {/* Navbar */}
-     <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px 48px", borderBottom: "1px solid rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", background: "transparent" }}>
-  <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 150, width: "auto", objectFit: "contain" }} />
-  <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-    <a href="/how-it-works" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Comment ça marche</a>
-    <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
-    <SignedOut>
-      <SignInButton mode="modal">
-        <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
-          Se connecter
-        </button>
-      </SignInButton>
-    </SignedOut>
-   <SignedIn>
-  <a href="/dashboard" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Dashboard</a>
-  <UserButton />
-</SignedIn>
-  </div>
-</nav>
+        <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px 48px", borderBottom: "1px solid rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", background: "transparent" }}>
+          <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 150, width: "auto", objectFit: "contain" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            <a href="/how-it-works" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Comment ça marche</a>
+            <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
+                  Se connecter
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <a href="/dashboard" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Dashboard</a>
+              <UserButton />
+            </SignedIn>
+          </div>
+        </nav>
 
         {/* Hero */}
-        <section style={{ maxWidth: 900, margin: "0 auto", padding: "100px 48px 60px", textAlign: "center" }}>
+        <section className="animate-fade-in" style={{ maxWidth: 900, margin: "0 auto", padding: "100px 48px 60px", textAlign: "center" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "6px 16px", borderRadius: 24, marginBottom: 32 }}>
             <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
             Propulsé par Claude AI
@@ -129,7 +128,7 @@ if (data.count === 0) {
 
           <h1 style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, marginBottom: 24, letterSpacing: -2 }}>
             Colle ta vidéo,{" "}
-            <span style={{ background: "linear-gradient(135deg, #378ADD, #AFA9EC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span className="gradient-animated">
               tout le reste
             </span>
             <br />on s&apos;en occupe.
@@ -155,7 +154,7 @@ if (data.count === 0) {
                   </button>
                 </SignInButton>
               </SignedOut>
-           ) : !isPro && generations >= MAX_FREE ? (
+            ) : !isPro && generations >= MAX_FREE ? (
               <button style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "not-allowed", whiteSpace: "nowrap" }}>
                 Limite atteinte
               </button>
@@ -173,7 +172,7 @@ if (data.count === 0) {
         </section>
 
         {/* Stats */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 64, padding: "32px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0 48px" }}>
+        <div className="animate-fade-in animate-fade-in-delay-1" style={{ display: "flex", justifyContent: "center", gap: 64, padding: "32px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0 48px" }}>
           {[["4", "formats générés"], ["30s", "temps moyen"], ["100%", "basé sur ta vidéo"]].map(([num, label]) => (
             <div key={label} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 32, fontWeight: 600, color: "white", letterSpacing: -1 }}>{num}</div>
@@ -184,10 +183,10 @@ if (data.count === 0) {
 
         {/* Formats */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 48px 48px" }}>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
+          <p className="animate-fade-in animate-fade-in-delay-2" style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
-            {formats.map((f) => (
-              <div key={f.key} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
+            {formats.map((f, i) => (
+              <div key={f.key} className={`card-hover animate-fade-in animate-fade-in-delay-${i + 1}`} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: f.bg, color: f.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
@@ -239,8 +238,8 @@ if (data.count === 0) {
         {/* Bottom bar */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
-  {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
-</span>
+            {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
+          </span>
           <a href="/pricing" style={{ fontSize: 15, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", borderRadius: 24, textDecoration: "none" }}>
             Passer à Pro →
           </a>
