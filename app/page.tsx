@@ -228,7 +228,7 @@ const [isPro, setIsPro] = useState(false);
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
   {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
 </span>
-          <a href="/pricing" style={{ fontSize: 13, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", fontSize: 15, borderRadius: 24, textDecoration: "none" }}>
+          <a href="/pricing" style={{ fontSize: 15, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", borderRadius: 24, textDecoration: "none" }}>
             Passer à Pro →
           </a>
         </div>
