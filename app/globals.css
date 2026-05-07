@@ -22,4 +22,11 @@ body {
   nav div { gap: 12px !important; }
   nav a { font-size: 12px !important; }
   nav button { font-size: 12px !important; padding: 7px 14px !important; }
+  h1 { font-size: 28px !important; letter-spacing: -1px !important; }
+  p { font-size: 14px !important; }
+  section { padding: 32px 20px !important; max-width: 100% !important; }
+  div[style*="max-width: 600px"] { max-width: 100% !important; margin: 0 !important; }
+  div[style*="border-radius: 50px"] { border-radius: 16px !important; flex-direction: column !important; padding: 10px !important; }
+  div[style*="border-radius: 50px"] input { width: 100% !important; margin-bottom: 8px !important; }
+  div[style*="border-radius: 50px"] button { width: 100% !important; border-radius: 12px !important; text-align: center !important; }
 }
