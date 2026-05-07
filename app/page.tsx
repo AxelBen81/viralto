@@ -54,7 +54,6 @@ const [isPro, setIsPro] = useState(false);
       });
   }
 }, [isSignedIn, user]);
-}, [isSignedIn, user]);
   function handleCopy(key: string, text: string) {
     navigator.clipboard.writeText(text);
     setCopied(key);
