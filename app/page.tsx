@@ -32,15 +32,28 @@ export default function Home() {
   const MAX_FREE = 3;
 const [isPro, setIsPro] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
   if (isSignedIn && user) {
     fetch(`/api/generations?userId=${user.id}`)
       .then((res) => res.json())
       .then((data) => {
         setGenerations(data.count);
         setIsPro(data.is_pro ?? false);
+
+        // Email de bienvenue si première fois
+        if (data.count === 0 && !data.is_pro) {
+          fetch("/api/welcome", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: user.primaryEmailAddress?.emailAddress,
+              firstName: user.firstName,
+            }),
+          });
+        }
       });
   }
+}, [isSignedIn, user]);
 }, [isSignedIn, user]);
   function handleCopy(key: string, text: string) {
     navigator.clipboard.writeText(text);
