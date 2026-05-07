@@ -101,9 +101,10 @@ const [isPro, setIsPro] = useState(false);
         </button>
       </SignInButton>
     </SignedOut>
-    <SignedIn>
-      <UserButton />
-    </SignedIn>
+   <SignedIn>
+  <a href="/dashboard" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Dashboard</a>
+  <UserButton />
+</SignedIn>
   </div>
 </nav>
 
