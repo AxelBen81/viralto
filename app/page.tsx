@@ -188,7 +188,7 @@ const [isPro, setIsPro] = useState(false);
                     </button>
                   )}
                 </div>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginBottom: 12 }}>{f.desc}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginBottom: 12 }}>{f.desc}</p>
                 {generated ? (
                   <pre style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: 14, maxHeight: 180, overflowY: "auto", margin: 0 }}>
                     {generatedContent[f.key] || fakeContent[f.key as keyof typeof fakeContent]}
