@@ -39,7 +39,7 @@ export default function Dashboard() {
           <div style={{ background: "linear-gradient(135deg, rgba(55,138,221,0.1), rgba(83,74,183,0.1))", border: "1px solid rgba(55,138,221,0.2)", borderRadius: 16, padding: 24, marginBottom: 48, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <p style={{ fontWeight: 500, marginBottom: 4 }}>Passe à Pro pour des générations illimitées</p>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)" }}>9€/mois · Annulable à tout moment</p>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)" }}>{"9€/mois · Annulable à tout moment"}</p>
             </div>
             <a href="/pricing" style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500, whiteSpace: "nowrap" }}>
               Passer à Pro →
