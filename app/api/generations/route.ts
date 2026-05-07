@@ -9,14 +9,21 @@ function getCurrentMonth() {
 export async function GET(req: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-
   if (!supabaseUrl || !supabaseKey) {
     return NextResponse.json({ error: "Missing env vars", url: !!supabaseUrl, key: !!supabaseKey });
   }
-
   const supabase = createClient(supabaseUrl, supabaseKey);
   const userId = req.nextUrl.searchParams.get("userId");
-  if (!userId) return NextResponse.json({ count: 0 });
+  if (!userId) return NextResponse.json({ count: 0, is_pro: false });
+
+  // Vérifier si l'utilisateur est Pro
+  const { data: userData } = await supabase
+    .from("users")
+    .select("is_pro")
+    .eq("id", userId)
+    .single();
+
+  const isPro = userData?.is_pro ?? false;
 
   const month = getCurrentMonth();
   const { count, error } = await supabase
@@ -26,28 +33,34 @@ export async function GET(req: NextRequest) {
     .eq("month", month);
 
   if (error) return NextResponse.json({ error: error.message });
-
-  return NextResponse.json({ count: count ?? 0 });
+  return NextResponse.json({ count: count ?? 0, is_pro: isPro });
 }
 
 export async function POST(req: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-
   if (!supabaseUrl || !supabaseKey) {
     return NextResponse.json({ error: "Missing env vars" }, { status: 500 });
   }
-
   const supabase = createClient(supabaseUrl, supabaseKey);
   const { userId } = await req.json();
   if (!userId) return NextResponse.json({ error: "Missing userId" }, { status: 400 });
 
+  // Vérifier si l'utilisateur est Pro
+  const { data: userData } = await supabase
+    .from("users")
+    .select("is_pro")
+    .eq("id", userId)
+    .single();
+
+  const isPro = userData?.is_pro ?? false;
+
+  // Si Pro, on enregistre quand même mais sans limite
   const month = getCurrentMonth();
   const { error } = await supabase
     .from("generations")
     .insert({ user_id: userId, month });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, is_pro: isPro });
 }
