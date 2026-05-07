@@ -1,5 +1,25 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0px 16px !important; }
+  nav img { height: 80px !important; }
+  nav div { gap: 12px !important; }
+  nav a { font-size: 12px !important; }
+  nav button { font-size: 12px !important; padding: 7px 14px !important; }
 }
