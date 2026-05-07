@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
           <p style="color:rgba(255,255,255,0.6);font-size:16px;line-height:1.7;margin-bottom:32px;">
             Tu as accès à <strong style="color:white;">3 générations gratuites</strong> ce mois-ci. Commence dès maintenant en collant un lien YouTube ou TikTok !
           </p>
-          <a href="https://stackblitz-starters-xktzf1vl-qud1.vercel.app" style="background:linear-gradient(135deg,#378ADD,#534AB7);color:white;padding:14px 28px;border-radius:24px;text-decoration:none;font-weight:500;font-size:16px;">
+          <a href="https://viralto.fr" style="background:linear-gradient(135deg,#378ADD,#534AB7);color:white;padding:14px 28px;border-radius:24px;text-decoration:none;font-weight:500;font-size:16px;">
             Commencer à générer →
           </a>
           <p style="color:rgba(255,255,255,0.3);font-size:13px;margin-top:48px;">
