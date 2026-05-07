@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Viralto — Transforme tes vidéos en contenu viral",
     description: "Génère en 30 secondes une caption Instagram, un script TikTok, un thread X et un email à partir de n'importe quelle vidéo.",
-    url: "https://stackblitz-starters-xktzf1vl-qud1.vercel.app",
+    url: "https://viralto.fr",
     siteName: "Viralto",
     locale: "fr_FR",
     type: "website",
