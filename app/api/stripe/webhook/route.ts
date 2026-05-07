@@ -11,16 +11,31 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
-  const sig = req.headers.get("stripe-signature")!;
+  const sig = req.headers.get("stripe-signature");
+
+  if (!sig) {
+    return NextResponse.json({ error: "No signature" }, { status: 400 });
+  }
 
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
-  } catch (err) {
-    return NextResponse.json({ error: "Webhook signature invalid" }, { status: 400 });
+    event = stripe.webhooks.constructEvent(
+      body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (err: any) {
+    console.error("Webhook error:", err.message);
+    return NextResponse.json({ error: err.message }, { status: 400 });
   }
 
   if (event.type === "checkout.session.completed") {
