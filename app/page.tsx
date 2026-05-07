@@ -86,14 +86,16 @@ export default function Home() {
       <div style={{ position: "relative", zIndex: 1 }}>
 
         {/* Navbar */}
-      <nav className="viralto-nav">
-  <img src="/LOGO_VIRALTO.png" alt="Viralto" className="viralto-logo" />
-  <div className="viralto-nav-links">
-    <a href="/how-it-works" className="viralto-nav-link">Comment ça marche</a>
-    <a href="/pricing" className="viralto-nav-link">Tarifs</a>
+     <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px 48px", borderBottom: "1px solid rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", background: "transparent" }}>
+  <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 150, width: "auto", objectFit: "contain" }} />
+  <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+    <a href="/how-it-works" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Comment ça marche</a>
+    <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
     <SignedOut>
       <SignInButton mode="modal">
-        <button className="viralto-nav-btn">Se connecter</button>
+        <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
+          Se connecter
+        </button>
       </SignInButton>
     </SignedOut>
     <SignedIn>
