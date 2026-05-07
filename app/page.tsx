@@ -40,8 +40,8 @@ const [isPro, setIsPro] = useState(false);
         setGenerations(data.count);
         setIsPro(data.is_pro ?? false);
 
-        // Email de bienvenue si première fois
-        if (data.count === 0 && !data.is_pro) {
+      // Email de bienvenue si première fois
+if (data.count === 0) {
           fetch("/api/welcome", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
