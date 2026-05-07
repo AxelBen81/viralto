@@ -171,10 +171,10 @@ const [isPro, setIsPro] = useState(false);
 
         {/* Formats */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 48px 48px" }}>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
             {formats.map((f) => (
-              <div key={f.key} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
+              <div key={f.key} style={{ background: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: f.bg, color: f.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
@@ -228,7 +228,7 @@ const [isPro, setIsPro] = useState(false);
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
   {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
 </span>
-          <a href="/pricing" style={{ fontSize: 13, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "10px 20px", borderRadius: 24, textDecoration: "none" }}>
+          <a href="/pricing" style={{ fontSize: 13, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", fontSize: 15, borderRadius: 24, textDecoration: "none" }}>
             Passer à Pro →
           </a>
         </div>
