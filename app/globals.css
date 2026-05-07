@@ -21,3 +21,61 @@
   /* Formats grid */
   .formats-grid { grid-template-columns: 1fr !important; }
 }
+.viralto-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  background: transparent;
+}
+
+.viralto-logo {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+}
+
+.viralto-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.viralto-nav-link {
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.viralto-nav-btn {
+  font-size: 15px;
+  color: white;
+  background: linear-gradient(135deg, #378ADD, #534AB7);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .viralto-nav {
+    padding: 0px 16px;
+  }
+  .viralto-logo {
+    height: 90px;
+  }
+  .viralto-nav-links {
+    gap: 12px;
+  }
+  .viralto-nav-link {
+    display: none;
+  }
+  .viralto-nav-btn {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
