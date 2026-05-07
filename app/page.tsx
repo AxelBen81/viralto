@@ -30,15 +30,18 @@ export default function Home() {
   const [generations, setGenerations] = useState(0);
   const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({});
   const MAX_FREE = 3;
+const [isPro, setIsPro] = useState(false);
 
   useEffect(() => {
-    if (isSignedIn && user) {
-      fetch(`/api/generations?userId=${user.id}`)
-        .then((res) => res.json())
-        .then((data) => setGenerations(data.count));
-    }
-  }, [isSignedIn, user]);
-
+  if (isSignedIn && user) {
+    fetch(`/api/generations?userId=${user.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setGenerations(data.count);
+        setIsPro(data.is_pro ?? false);
+      });
+  }
+}, [isSignedIn, user]);
   function handleCopy(key: string, text: string) {
     navigator.clipboard.writeText(text);
     setCopied(key);
@@ -47,7 +50,7 @@ export default function Home() {
 
   async function handleGenerate() {
     if (!url || !isSignedIn || !user) return;
-    if (generations >= MAX_FREE) return;
+    if (!isPro && generations >= MAX_FREE) return;
     setLoading(true);
     setGenerated(false);
     try {
@@ -139,7 +142,7 @@ export default function Home() {
                   </button>
                 </SignInButton>
               </SignedOut>
-            ) : generations >= MAX_FREE ? (
+           ) : !isPro && generations >= MAX_FREE ? (
               <button style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "not-allowed", whiteSpace: "nowrap" }}>
                 Limite atteinte
               </button>
@@ -223,8 +226,8 @@ export default function Home() {
         {/* Bottom bar */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)" }}>
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
-            Plan gratuit · {MAX_FREE - generations} génération{MAX_FREE - generations > 1 ? "s" : ""} restante{MAX_FREE - generations > 1 ? "s" : ""} ce mois
-          </span>
+  {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
+</span>
           <a href="/pricing" style={{ fontSize: 13, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "10px 20px", borderRadius: 24, textDecoration: "none" }}>
             Passer à Pro →
           </a>
