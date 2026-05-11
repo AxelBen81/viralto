@@ -68,7 +68,7 @@ export default function Home() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ transcript: url, isPro }),,
+        body: JSON.stringify({ transcript: url, isPro }),
       });
       const data = await res.json();
       if (data.caption) setGeneratedContent(data);
