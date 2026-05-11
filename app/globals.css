@@ -19,17 +19,20 @@ body {
 @media (max-width: 768px) {
   nav { padding: 0px 16px !important; }
   nav img { height: 80px !important; }
-  nav div { gap: 12px !important; }
-  nav a { font-size: 12px !important; }
-  nav button { font-size: 12px !important; padding: 7px 14px !important; }
-  h1 { font-size: 28px !important; letter-spacing: -1px !important; }
-  p { font-size: 14px !important; }
-  section { padding: 32px 20px !important; max-width: 100% !important; }
-  div[style*="max-width: 600px"] { max-width: 100% !important; margin: 0 !important; }
-  div[style*="border-radius: 50px"] { border-radius: 16px !important; flex-direction: column !important; padding: 10px !important; }
-  div[style*="border-radius: 50px"] input { width: 100% !important; margin-bottom: 8px !important; }
+  nav > div { gap: 12px !important; }
+  nav a { display: none !important; }
+  nav button { font-size: 12px !important; padding: 6px 12px !important; max-width: 110px !important; }
+  h1 { font-size: 36px !important; letter-spacing: -1px !important; }
+  p { font-size: 15px !important; }
+  section { padding: 40px 20px 32px !important; max-width: 100% !important; }
+  div[style*="max-width: 600px"] { max-width: 100% !important; margin: 0 16px !important; }
+  div[style*="border-radius: 50px"] { border-radius: 16px !important; flex-direction: column !important; padding: 12px !important; gap: 8px !important; }
+  div[style*="border-radius: 50px"] input { width: 100% !important; margin-bottom: 4px !important; }
   div[style*="border-radius: 50px"] button { width: 100% !important; border-radius: 12px !important; text-align: center !important; }
+  div[style*="gap: 64px"] { gap: 24px !important; padding: 24px 16px !important; margin: 0 !important; }
+  div[style*="gridTemplateColumns: repeat(2, 1fr)"] { grid-template-columns: 1fr !important; }
 }
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
