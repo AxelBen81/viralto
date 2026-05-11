@@ -32,10 +32,12 @@ export async function POST(req: NextRequest) {
   const proFormatsPrompt = isPro ? `,"hashtags":"Un pack de 30 hashtags optimisés groupés par catégorie : niche (10), tendance (10), large audience (10). Format : #hashtag séparés par des espaces","story":"Un script Story Instagram de 5 slides : Slide 1: [accroche] Slide 2: [problème] Slide 3: [solution] Slide 4: [preuve] Slide 5: [CTA]"` : "";
 
   const prompt = `Tu es un expert en création de contenu pour les réseaux sociaux.
-Voici la transcription d'une vidéo : ${transcriptText}
-Génère un kit de contenu complet et original basé sur cette transcription.
+Voici la transcription d'une vidéo : "${transcriptText}"
+
+IMPORTANT : Le contenu que tu génères doit être DIRECTEMENT basé sur cette transcription. Utilise les mêmes sujets, exemples, anecdotes et messages clés de la vidéo. Ne génère PAS de contenu générique.
+
 Réponds UNIQUEMENT avec ce JSON exact, sans backticks, sans markdown :
-{"caption":"Une caption Instagram originale avec emojis hook accrocheur corps du message et call-to-action","tiktok":"Un script TikTok avec [0-3s] hook [3-15s] développement [15-25s] solution [25-30s] CTA","thread":"Un thread X de 5 tweets numérotés 1/ 2/ 3/ 4/ 5/","email":"Un email newsletter complet avec objet et corps du message"${proFormatsPrompt}}`;
+{"caption":"Caption Instagram basée sur le contenu exact de la vidéo avec emojis hook accrocheur corps du message et call-to-action","tiktok":"Script TikTok basé sur le contenu exact de la vidéo avec [0-3s] hook [3-15s] développement [15-25s] solution [25-30s] CTA","thread":"Thread X de 5 tweets basés sur le contenu exact de la vidéo numérotés 1/ 2/ 3/ 4/ 5/","email":"Email newsletter basé sur le contenu exact de la vidéo avec objet et corps du message"${proFormatsPrompt}}`;
 
   try {
     const message = await client.messages.create({
