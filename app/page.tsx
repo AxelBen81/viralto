@@ -68,7 +68,7 @@ export default function Home() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ transcript: url }),
+        body: JSON.stringify({ transcript: url, isPro }),,
       });
       const data = await res.json();
       if (data.caption) setGeneratedContent(data);
@@ -217,22 +217,44 @@ export default function Home() {
           </div>
 
           {/* Pro formats */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 16 }}>
-            {proFormats.map((f) => (
-              <div key={f.label} style={{ background: "rgba(255,255,255,0.015)", border: "1px solid rgba(255,255,255,0.05)", borderRadius: 16, padding: 20, opacity: 0.35 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>
-                      {f.icon}
-                    </div>
-                    <span style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>{f.label}</span>
-                  </div>
-                  <span style={{ fontSize: 11, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "3px 10px", borderRadius: 6, fontWeight: 500 }}>Pro</span>
-                </div>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.25)" }}>{f.desc}</p>
-              </div>
-            ))}
+<div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 16 }}>
+  {[
+    { key: "hashtags", label: "Pack hashtags", desc: "30 hashtags optimisés", icon: "#", bg: "rgba(175,169,236,0.2)", color: "#AFA9EC" },
+    { key: "story", label: "Story Instagram", desc: "Slides · textes clés", icon: "st", bg: "rgba(55,138,221,0.2)", color: "#85B7EB" },
+  ].map((f) => (
+    <div key={f.label} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${isPro ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.05)"}`, borderRadius: 16, padding: 20, position: "relative", opacity: isPro ? 1 : 0.5 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: isPro ? f.bg : "rgba(255,255,255,0.04)", color: isPro ? f.color : "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
+            {f.icon}
           </div>
+          <span style={{ fontSize: 15, fontWeight: 500, color: isPro ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)" }}>{f.label}</span>
+        </div>
+        {isPro ? (
+          generated && generatedContent[f.key] && (
+            <button onClick={() => handleCopy(f.key, generatedContent[f.key])} style={{ fontSize: 12, color: "#85B7EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>
+              {copied === f.key ? "✅ Copié !" : "Copier"}
+            </button>
+          )
+        ) : (
+          <a href="/pricing" style={{ fontSize: 11, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "3px 10px", borderRadius: 6, fontWeight: 500, textDecoration: "none" }}>🔒 Pro</a>
+        )}
+      </div>
+      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 12 }}>{f.desc}</p>
+      {isPro && generated && generatedContent[f.key] ? (
+        <pre style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: 14, maxHeight: 180, overflowY: "auto", margin: 0 }}>
+          {generatedContent[f.key]}
+        </pre>
+      ) : (
+        <div>
+          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 6 }} />
+          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "60%", marginBottom: 6 }} />
+          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "40%" }} />
+        </div>
+      )}
+    </div>
+  ))}
+</div>
         </section>
 
         {/* Bottom bar */}
