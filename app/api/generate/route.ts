@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { YoutubeTranscript } from "youtube-transcript";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -11,6 +10,25 @@ function extractVideoId(url: string): string | null {
   return match ? match[1] : null;
 }
 
+async function getTranscript(url: string): Promise<string> {
+  const videoId = extractVideoId(url);
+  if (!videoId) return url;
+
+  try {
+    const res = await fetch(`https://api.supadata.ai/v1/youtube/transcript?videoId=${videoId}&text=true`, {
+      headers: {
+        "x-api-key": process.env.SUPADATA_API_KEY!,
+      },
+    });
+    const data = await res.json();
+    if (data.content) return data.content;
+    return url;
+  } catch {
+    console.log("Supadata failed, using URL");
+    return url;
+  }
+}
+
 export async function POST(req: NextRequest) {
   const { transcript: url, isPro } = await req.json();
 
@@ -18,16 +36,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "URL manquante" }, { status: 400 });
   }
 
-  let transcriptText = url;
-  try {
-    const videoId = extractVideoId(url);
-    if (videoId) {
-      const transcript = await YoutubeTranscript.fetchTranscript(videoId);
-      transcriptText = transcript.map((t) => t.text).join(" ");
-    }
-  } catch {
-    console.log("Transcription impossible, utilisation de l'URL");
-  }
+  const transcriptText = await getTranscript(url);
 
   const proFormatsPrompt = isPro ? `,"hashtags":"Un pack de 30 hashtags optimisés groupés par catégorie : niche (10), tendance (10), large audience (10). Format : #hashtag séparés par des espaces","story":"Un script Story Instagram de 5 slides : Slide 1: [accroche] Slide 2: [problème] Slide 3: [solution] Slide 4: [preuve] Slide 5: [CTA]"` : "";
 
