@@ -12,14 +12,13 @@ function extractVideoId(url: string): string | null {
 }
 
 export async function POST(req: NextRequest) {
-  const { transcript: url } = await req.json();
+  const { transcript: url, isPro } = await req.json();
 
   if (!url) {
     return NextResponse.json({ error: "URL manquante" }, { status: 400 });
   }
 
   let transcriptText = url;
-
   try {
     const videoId = extractVideoId(url);
     if (videoId) {
@@ -30,17 +29,18 @@ export async function POST(req: NextRequest) {
     console.log("Transcription impossible, utilisation de l'URL");
   }
 
+  const proFormatsPrompt = isPro ? `,"hashtags":"Un pack de 30 hashtags optimisés groupés par catégorie : niche (10), tendance (10), large audience (10). Format : #hashtag séparés par des espaces","story":"Un script Story Instagram de 5 slides : Slide 1: [accroche] Slide 2: [problème] Slide 3: [solution] Slide 4: [preuve] Slide 5: [CTA]"` : "";
+
   const prompt = `Tu es un expert en création de contenu pour les réseaux sociaux.
 Voici la transcription d'une vidéo : ${transcriptText}
-
 Génère un kit de contenu complet et original basé sur cette transcription.
 Réponds UNIQUEMENT avec ce JSON exact, sans backticks, sans markdown :
-{"caption":"Une caption Instagram originale avec emojis hook accrocheur corps du message et call-to-action","tiktok":"Un script TikTok avec [0-3s] hook [3-15s] développement [15-25s] solution [25-30s] CTA","thread":"Un thread X de 5 tweets numérotés 1/ 2/ 3/ 4/ 5/","email":"Un email newsletter complet avec objet et corps du message"}`;
+{"caption":"Une caption Instagram originale avec emojis hook accrocheur corps du message et call-to-action","tiktok":"Un script TikTok avec [0-3s] hook [3-15s] développement [15-25s] solution [25-30s] CTA","thread":"Un thread X de 5 tweets numérotés 1/ 2/ 3/ 4/ 5/","email":"Un email newsletter complet avec objet et corps du message"${proFormatsPrompt}}`;
 
   try {
     const message = await client.messages.create({
       model: "claude-opus-4-5",
-      max_tokens: 2000,
+      max_tokens: 3000,
       messages: [{ role: "user", content: prompt }],
     });
 
