@@ -20,7 +20,7 @@ body {
   nav { padding: 0px 16px !important; }
   nav img { height: 80px !important; }
   nav > div { gap: 12px !important; }
-  nav a { display: none !important; }
+ nav a { font-size: 11px !important; }
   nav button { font-size: 12px !important; padding: 6px 12px !important; max-width: 110px !important; }
   h1 { font-size: 36px !important; letter-spacing: -1px !important; }
   p { font-size: 15px !important; }
