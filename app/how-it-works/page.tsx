@@ -24,9 +24,15 @@ export default function HowItWorks() {
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
             <a href="/how-it-works" style={{ fontSize: 15, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
             <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
-            <a href="/" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
-              Essayer gratuitement
-            </a>
+           {isSignedIn ? (
+  <a href="/pricing" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
+    Passer à Pro →
+  </a>
+) : (
+  <a href="/" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
+    Essayer gratuitement
+  </a>
+)}
           </div>
         </nav>
 
