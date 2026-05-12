@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      from: "Viralto <onboarding@resend.dev>",
+      from: "Viralto <contact@viralto.fr>",
       to: email,
       subject: "Bienvenue sur Viralto 🚀",
       html: `
