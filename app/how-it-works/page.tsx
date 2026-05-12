@@ -1,4 +1,8 @@
+"use client";
+import { useUser } from "@clerk/nextjs";
+
 export default function HowItWorks() {
+  const { isSignedIn } = useUser();
   return (
     <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
