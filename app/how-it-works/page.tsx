@@ -122,17 +122,29 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="animate-fade-in" style={{ textAlign: "center", padding: "0 48px 80px" }}>
-          <div style={{ background: "linear-gradient(135deg, rgba(55,138,221,0.1), rgba(83,74,183,0.1))", border: "1px solid rgba(55,138,221,0.2)", borderRadius: 24, padding: "48px", maxWidth: 600, margin: "0 auto" }}>
-            <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Prêt à gagner du temps ?"}</h2>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"3 générations gratuites pour commencer. Aucune carte bancaire requise."}</p>
-            <a href="/" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
-              {"Essayer gratuitement →"}
-            </a>
-          </div>
-        </section>
-
+       {/* CTA */}
+<section className="animate-fade-in" style={{ textAlign: "center", padding: "0 48px 80px" }}>
+  <div style={{ background: "linear-gradient(135deg, rgba(55,138,221,0.1), rgba(83,74,183,0.1))", border: "1px solid rgba(55,138,221,0.2)", borderRadius: 24, padding: "48px", maxWidth: 600, margin: "0 auto" }}>
+    {isSignedIn ? (
+      <>
+        <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Passe à Pro 🚀"}</h2>
+        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"Générations illimitées, Pack hashtags et Story Instagram inclus."}</p>
+        <a href="/pricing" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+          {"Passer à Pro → 9€/mois"}
+        </a>
+      </>
+    ) : (
+      <>
+        <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Prêt à gagner du temps ?"}</h2>
+        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"3 générations gratuites pour commencer. Aucune carte bancaire requise."}</p>
+        <a href="/" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+          {"Essayer gratuitement →"}
+        </a>
+      </>
+    )}
+  </div>
+</section>
+        
         {/* Footer */}
         <div style={{ display: "flex", justifyContent: "center", gap: 32, padding: "24px 48px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
           <a href="/cgu" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"CGU"}</a>
