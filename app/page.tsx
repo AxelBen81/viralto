@@ -59,7 +59,7 @@ export default function Home() {
     setTimeout(() => setCopied(""), 2000);
   }
 
-  async function handleGenerate() {
+ async function handleGenerate() {
     if (!url || !isSignedIn || !user) return;
     if (!isPro && generations >= MAX_FREE) return;
     setLoading(true);
@@ -71,6 +71,10 @@ export default function Home() {
         body: JSON.stringify({ transcript: url, isPro }),
       });
       const data = await res.json();
+      if (data.error) {
+        alert("❌ Erreur lors de la génération. Vérifie que le lien est valide et réessaie.");
+        return;
+      }
       if (data.caption) setGeneratedContent(data);
       await fetch("/api/generations", {
         method: "POST",
@@ -80,7 +84,7 @@ export default function Home() {
       setGenerations(generations + 1);
       setGenerated(true);
     } catch {
-      console.error("Erreur génération");
+      alert("❌ Une erreur est survenue. Vérifie ta connexion et réessaie.");
     } finally {
       setLoading(false);
     }
