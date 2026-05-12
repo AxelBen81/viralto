@@ -107,8 +107,8 @@ export default function Home() {
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px 48px", borderBottom: "1px solid rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", background: "transparent" }}>
           <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 150, width: "auto", objectFit: "contain" }} />
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <a href="/how-it-works" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Comment ça marche</a>
-            <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
+           <a href="/how-it-works" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
+           <a href="/pricing" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Tarifs</a>
             <SignedOut>
               <SignInButton mode="modal">
                 <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
