@@ -5,27 +5,22 @@ const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-function extractVideoId(url: string): string | null {
-  const match = url.match(/(?:v=|youtu\.be\/|shorts\/)([a-zA-Z0-9_-]{11})/);
-  return match ? match[1] : null;
-}
-
-async function getTranscript(url: string): Promise<string> {
-  const videoId = extractVideoId(url);
-  if (!videoId) return url;
+async function getTranscript(url: string): Promise<{ text: string; error?: string }> {
+  if (!url.includes("youtube.com") && !url.includes("youtu.be") && !url.includes("tiktok.com")) {
+    return { text: "", error: "Lien invalide. Utilise un lien YouTube ou TikTok." };
+  }
 
   try {
-    const res = await fetch(`https://api.supadata.ai/v1/youtube/transcript?videoId=${videoId}&text=true`, {
+    const res = await fetch(`https://api.supadata.ai/v1/transcript?url=${encodeURIComponent(url)}&text=true`, {
       headers: {
         "x-api-key": process.env.SUPADATA_API_KEY!,
       },
     });
     const data = await res.json();
-    if (data.content) return data.content;
-    return url;
+    if (data.content) return { text: data.content };
+    return { text: "", error: "Impossible de récupérer la transcription. La vidéo est peut-être privée ou sans sous-titres." };
   } catch {
-    console.log("Supadata failed, using URL");
-    return url;
+    return { text: "", error: "Erreur lors de la transcription. Réessaie." };
   }
 }
 
@@ -36,7 +31,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "URL manquante" }, { status: 400 });
   }
 
-  const transcriptText = await getTranscript(url);
+  const transcriptResult = await getTranscript(url);
+  if (transcriptResult.error) {
+    return NextResponse.json({ error: transcriptResult.error }, { status: 400 });
+  }
+  const transcriptText = transcriptResult.text;
 
   const proFormatsPrompt = isPro ? `,"hashtags":"Un pack de 30 hashtags optimisés groupés par catégorie : niche (10), tendance (10), large audience (10). Format : #hashtag séparés par des espaces","story":"Un script Story Instagram de 5 slides : Slide 1: [accroche] Slide 2: [problème] Slide 3: [solution] Slide 4: [preuve] Slide 5: [CTA]"` : "";
 
