@@ -1,8 +1,19 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
 
 export default function HowItWorks() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, user } = useUser();
+  const [isPro, setIsPro] = useState(false);
+
+  useEffect(() => {
+    if (isSignedIn && user) {
+      fetch(`/api/generations?userId=${user.id}`)
+        .then((res) => res.json())
+        .then((data) => setIsPro(data.is_pro ?? false));
+    }
+  }, [isSignedIn, user]);
+
   return (
     <main style={{ background: "#080B14", minHeight: "100vh", color: "white", fontFamily: "'Inter', sans-serif", position: "relative", overflow: "hidden" }}>
 
@@ -24,15 +35,19 @@ export default function HowItWorks() {
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
             <a href="/how-it-works" style={{ fontSize: 15, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
             <a href="/pricing" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Tarifs</a>
-           {isSignedIn ? (
-  <a href="/pricing" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
-    Passer à Pro →
-  </a>
-) : (
-  <a href="/" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
-    Essayer gratuitement
-  </a>
-)}
+            {!isSignedIn ? (
+              <a href="/" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
+                Essayer gratuitement
+              </a>
+            ) : isPro ? (
+              <a href="/" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
+                {"Générer du contenu →"}
+              </a>
+            ) : (
+              <a href="/pricing" style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", padding: "10px 24px", borderRadius: 24, textDecoration: "none", fontWeight: 500 }}>
+                {"Passer à Pro →"}
+              </a>
+            )}
           </div>
         </nav>
 
@@ -51,24 +66,9 @@ export default function HowItWorks() {
         <section className="animate-fade-in animate-fade-in-delay-1" style={{ maxWidth: 700, margin: "0 auto", padding: "0 48px 80px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {[
-              {
-                num: "1",
-                title: "Colle ton lien",
-                desc: "Copie l'URL de ta vidéo YouTube ou TikTok et colle-la dans Viralto. C'est tout ce dont on a besoin.",
-                icon: "🔗"
-              },
-              {
-                num: "2",
-                title: "Notre IA analyse ta vidéo",
-                desc: "Viralto transcrit et analyse le contenu de ta vidéo en quelques secondes. Pas besoin de résumer, ni de recopier quoi que ce soit.",
-                icon: "🤖"
-              },
-              {
-                num: "3",
-                title: "Récupère ton kit de contenu",
-                desc: "En 30 secondes, tu reçois jusqu'à 6 formats prêts à publier. Copie et poste.",
-                icon: "🚀"
-              },
+              { num: "1", title: "Colle ton lien", desc: "Copie l'URL de ta vidéo YouTube ou TikTok et colle-la dans Viralto. C'est tout ce dont on a besoin.", icon: "🔗" },
+              { num: "2", title: "Notre IA analyse ta vidéo", desc: "Viralto transcrit et analyse le contenu de ta vidéo en quelques secondes. Pas besoin de résumer, ni de recopier quoi que ce soit.", icon: "🤖" },
+              { num: "3", title: "Récupère ton kit de contenu", desc: "En 30 secondes, tu reçois jusqu'à 6 formats prêts à publier. Copie et poste.", icon: "🚀" },
             ].map((step, i) => (
               <div key={step.num} className={`animate-fade-in animate-fade-in-delay-${i + 1}`} style={{ display: "flex", gap: 24, alignItems: "flex-start", padding: "32px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none" }}>
                 <div style={{ width: 56, height: 56, background: "linear-gradient(135deg, #378ADD, #534AB7)", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, flexShrink: 0 }}>
@@ -132,29 +132,37 @@ export default function HowItWorks() {
           </div>
         </section>
 
-       {/* CTA */}
-<section className="animate-fade-in" style={{ textAlign: "center", padding: "0 48px 80px" }}>
-  <div style={{ background: "linear-gradient(135deg, rgba(55,138,221,0.1), rgba(83,74,183,0.1))", border: "1px solid rgba(55,138,221,0.2)", borderRadius: 24, padding: "48px", maxWidth: 600, margin: "0 auto" }}>
-    {isSignedIn ? (
-      <>
-        <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Passe à Pro 🚀"}</h2>
-        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"Générations illimitées, Pack hashtags et Story Instagram inclus."}</p>
-        <a href="/pricing" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
-          {"Passer à Pro → 9€/mois"}
-        </a>
-      </>
-    ) : (
-      <>
-        <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Prêt à gagner du temps ?"}</h2>
-        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"3 générations gratuites pour commencer. Aucune carte bancaire requise."}</p>
-        <a href="/" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
-          {"Essayer gratuitement →"}
-        </a>
-      </>
-    )}
-  </div>
-</section>
-        
+        {/* CTA */}
+        <section className="animate-fade-in" style={{ textAlign: "center", padding: "0 48px 80px" }}>
+          <div style={{ background: "linear-gradient(135deg, rgba(55,138,221,0.1), rgba(83,74,183,0.1))", border: "1px solid rgba(55,138,221,0.2)", borderRadius: 24, padding: "48px", maxWidth: 600, margin: "0 auto" }}>
+            {!isSignedIn ? (
+              <>
+                <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Prêt à gagner du temps ?"}</h2>
+                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"3 générations gratuites pour commencer. Aucune carte bancaire requise."}</p>
+                <a href="/" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+                  {"Essayer gratuitement →"}
+                </a>
+              </>
+            ) : isPro ? (
+              <>
+                <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Tu es déjà Pro 🚀"}</h2>
+                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"Profite de tes générations illimitées et de tous les formats Pro."}</p>
+                <a href="/" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+                  {"Générer du contenu →"}
+                </a>
+              </>
+            ) : (
+              <>
+                <h2 style={{ fontSize: 32, fontWeight: 600, marginBottom: 16, letterSpacing: -1 }}>{"Passe à Pro 🚀"}</h2>
+                <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 32 }}>{"Générations illimitées, Pack hashtags et Story Instagram inclus."}</p>
+                <a href="/pricing" style={{ display: "inline-block", background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+                  {"Passer à Pro → 9€/mois"}
+                </a>
+              </>
+            )}
+          </div>
+        </section>
+
         {/* Footer */}
         <div style={{ display: "flex", justifyContent: "center", gap: 32, padding: "24px 48px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
           <a href="/cgu" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"CGU"}</a>
