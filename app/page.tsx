@@ -159,9 +159,11 @@ export default function Home() {
                 </SignInButton>
               </SignedOut>
             ) : !isPro && generations >= MAX_FREE ? (
-              <button style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "not-allowed", whiteSpace: "nowrap" }}>
-                Limite atteinte
-              </button>
+              <button 
+  onClick={() => setShowLimitModal(true)}
+  style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
+  Passer à Pro →
+</button>
             ) : (
               <button
                 onClick={handleGenerate}
