@@ -120,7 +120,7 @@ export default function Home() {
         </nav>
 
         {/* Hero */}
-        <section className="animate-fade-in" style={{ maxWidth: 900, margin: "0 auto", padding: "100px 48px 60px", textAlign: "center" }}>
+        <section className="animate-fade-in" style={{ maxWidth: 900, margin: "0 auto", padding: "60px 48px 40px", textAlign: "center" }}>
 
           <h1 style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, marginBottom: 24, letterSpacing: -2 }}>
             Colle ta vidéo,{" "}
