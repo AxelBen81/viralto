@@ -265,7 +265,7 @@ export default function Home() {
     <span className="gradient-animated">{"à adapter ton contenu"}</span>
   </h2>
 </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+         <div className="grid-why" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             {[
               { icon: "⏱️", title: "3h économisées par semaine", desc: "Un créateur passe en moyenne 3h à adapter son contenu. Viralto le fait en 30 secondes." },
               { icon: "🎯", title: "Contenu basé sur ta vidéo", desc: "Chaque résultat est unique et directement tiré de ce que tu as dit dans ta vidéo. Zéro contenu générique." },
