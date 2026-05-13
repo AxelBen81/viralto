@@ -183,10 +183,16 @@ export default function Home() {
 
         {/* Pourquoi Viralto */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "64px 48px 0" }}>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12, textAlign: "center" }}>Pourquoi Viralto</p>
-          <h2 style={{ fontSize: 40, fontWeight: 600, textAlign: "center", marginBottom: 48, letterSpacing: -1 }}>
-            {"Arrête de perdre du temps à adapter ton contenu"}
-          </h2>
+         <div style={{ textAlign: "center", marginBottom: 48 }}>
+  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "6px 16px", borderRadius: 24, marginBottom: 20 }}>
+    <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
+    Pourquoi Viralto
+  </div>
+  <h2 style={{ fontSize: 48, fontWeight: 600, letterSpacing: -2, lineHeight: 1.1 }}>
+    {"Arrête de perdre du temps"}<br />
+    <span className="gradient-animated">{"à adapter ton contenu"}</span>
+  </h2>
+</div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             {[
               { icon: "⏱️", title: "3h économisées par semaine", desc: "Un créateur passe en moyenne 3h à adapter son contenu. Viralto le fait en 30 secondes." },
