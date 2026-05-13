@@ -254,7 +254,7 @@ export default function Home() {
         </section>
         
         {/* Pourquoi Viralto */}
-        <section style={{ maxWidth: 960, margin: "0 auto", padding: "24px 48px 0" }}>
+        <section style={{ maxWidth: 960, margin: "0 auto", padding: "24px 48px 24" }}>
          <div style={{ textAlign: "center", marginBottom: 48 }}>
   <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 16, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "8px 20px", borderRadius: 24, marginBottom: 20 }}>
     <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
