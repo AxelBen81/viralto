@@ -31,6 +31,7 @@ export default function Home() {
   const [generatedContent, setGeneratedContent] = useState<Record<string, string>>({});
   const MAX_FREE = 3;
   const [isPro, setIsPro] = useState(false);
+  const [showLimitModal, setShowLimitModal] = useState(false);
 
   useEffect(() => {
     if (isSignedIn && user) {
