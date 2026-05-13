@@ -121,10 +121,6 @@ export default function Home() {
 
         {/* Hero */}
         <section className="animate-fade-in" style={{ maxWidth: 900, margin: "0 auto", padding: "100px 48px 60px", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "6px 16px", borderRadius: 24, marginBottom: 32 }}>
-            <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
-            Propulsé par Claude AI
-          </div>
 
           <h1 style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, marginBottom: 24, letterSpacing: -2 }}>
             Colle ta vidéo,{" "}
