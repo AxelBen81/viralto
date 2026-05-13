@@ -16,11 +16,6 @@ const formats = [
   { key: "email", label: "Email newsletter", desc: "Objet · corps · CTA", icon: "@", bg: "rgba(186,117,23,0.2)", color: "#FAC775" },
 ];
 
-const proFormats = [
-  { label: "Pack hashtags", desc: "30 hashtags optimisés", icon: "#" },
-  { label: "Story Instagram", desc: "Slides · textes clés", icon: "st" },
-];
-
 export default function Home() {
   const { isSignedIn, user } = useUser();
   const [url, setUrl] = useState("");
@@ -60,7 +55,7 @@ export default function Home() {
     setTimeout(() => setCopied(""), 2000);
   }
 
- async function handleGenerate() {
+  async function handleGenerate() {
     if (!url || !isSignedIn || !user) return;
     if (!isPro && generations >= MAX_FREE) return;
     setLoading(true);
@@ -108,8 +103,8 @@ export default function Home() {
         <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0px 48px", borderBottom: "1px solid rgba(255,255,255,0.04)", backdropFilter: "blur(20px)", background: "transparent" }}>
           <img src="/LOGO_VIRALTO.png" alt="Viralto" style={{ height: 150, width: "auto", objectFit: "contain" }} />
           <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-           <a href="/how-it-works" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
-           <a href="/pricing" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Tarifs</a>
+            <a href="/how-it-works" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
+            <a href="/pricing" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Tarifs</a>
             <SignedOut>
               <SignInButton mode="modal">
                 <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
@@ -133,9 +128,7 @@ export default function Home() {
 
           <h1 style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1, marginBottom: 24, letterSpacing: -2 }}>
             Colle ta vidéo,{" "}
-            <span className="gradient-animated">
-              tout le reste
-            </span>
+            <span className="gradient-animated">tout le reste</span>
             <br />on s&apos;en occupe.
           </h1>
 
@@ -143,7 +136,7 @@ export default function Home() {
             Transforme n&apos;importe quelle vidéo en kit de contenu complet — caption Instagram, script TikTok, thread X et email en 30 secondes.
           </p>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 600, margin: "0 auto 16px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 50, padding: "8px 8px 8px 24px" }} className="search-bar">
+          <div style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 600, margin: "0 auto 16px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 50, padding: "8px 8px 8px 24px" }} className="search-bar">
             <input
               type="text"
               placeholder="Colle ton lien YouTube ou TikTok..."
@@ -160,11 +153,11 @@ export default function Home() {
                 </SignInButton>
               </SignedOut>
             ) : !isPro && generations >= MAX_FREE ? (
-              <button 
-  onClick={() => setShowLimitModal(true)}
-  style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
-  Passer à Pro →
-</button>
+              <button
+                onClick={() => setShowLimitModal(true)}
+                style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", border: "none", padding: "12px 28px", borderRadius: 50, fontSize: 15, cursor: "pointer", whiteSpace: "nowrap" }}>
+                Passer à Pro →
+              </button>
             ) : (
               <button
                 onClick={handleGenerate}
@@ -187,6 +180,30 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Pourquoi Viralto */}
+        <section style={{ maxWidth: 960, margin: "0 auto", padding: "64px 48px 0" }}>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12, textAlign: "center" }}>Pourquoi Viralto</p>
+          <h2 style={{ fontSize: 40, fontWeight: 600, textAlign: "center", marginBottom: 48, letterSpacing: -1 }}>
+            {"Arrête de perdre du temps à adapter ton contenu"}
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            {[
+              { icon: "⏱️", title: "3h économisées par semaine", desc: "Un créateur passe en moyenne 3h à adapter son contenu. Viralto le fait en 30 secondes." },
+              { icon: "🎯", title: "Contenu basé sur ta vidéo", desc: "Chaque résultat est unique et directement tiré de ce que tu as dit dans ta vidéo. Zéro contenu générique." },
+              { icon: "📱", title: "6 formats en un clic", desc: "Instagram, TikTok, X, email, hashtags et Story — tout est prêt à copier-coller directement." },
+              { icon: "🤖", title: "Propulsé par Claude AI", desc: "L'IA la plus avancée du marché analyse ta vidéo et génère du contenu de qualité professionnelle." },
+              { icon: "🔒", title: "Sans engagement", desc: "Plan gratuit pour tester, Pro à 9€/mois sans engagement. Tu annules quand tu veux." },
+              { icon: "🚀", title: "Prêt en 30 secondes", desc: "Colle ton lien, clique sur Générer. Ton kit de contenu complet est prêt avant que tu aies fini ton café." },
+            ].map((item) => (
+              <div key={item.title} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 24 }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
+                <p style={{ fontSize: 16, fontWeight: 600, color: "white", marginBottom: 8 }}>{item.title}</p>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Formats */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 48px 48px" }}>
@@ -224,44 +241,44 @@ export default function Home() {
           </div>
 
           {/* Pro formats */}
-<div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 16 }}>
-  {[
-    { key: "hashtags", label: "Pack hashtags", desc: "30 hashtags optimisés", icon: "#", bg: "rgba(175,169,236,0.2)", color: "#AFA9EC" },
-    { key: "story", label: "Story Instagram", desc: "Slides · textes clés", icon: "st", bg: "rgba(55,138,221,0.2)", color: "#85B7EB" },
-  ].map((f) => (
-    <div key={f.label} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${isPro ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.05)"}`, borderRadius: 16, padding: 20, position: "relative", opacity: isPro ? 1 : 0.5 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: isPro ? f.bg : "rgba(255,255,255,0.04)", color: isPro ? f.color : "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
-            {f.icon}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginTop: 16 }}>
+            {[
+              { key: "hashtags", label: "Pack hashtags", desc: "30 hashtags optimisés", icon: "#", bg: "rgba(175,169,236,0.2)", color: "#AFA9EC" },
+              { key: "story", label: "Story Instagram", desc: "Slides · textes clés", icon: "st", bg: "rgba(55,138,221,0.2)", color: "#85B7EB" },
+            ].map((f) => (
+              <div key={f.label} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${isPro ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.05)"}`, borderRadius: 16, padding: 20, position: "relative", opacity: isPro ? 1 : 0.5 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: isPro ? f.bg : "rgba(255,255,255,0.04)", color: isPro ? f.color : "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
+                      {f.icon}
+                    </div>
+                    <span style={{ fontSize: 15, fontWeight: 500, color: isPro ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)" }}>{f.label}</span>
+                  </div>
+                  {isPro ? (
+                    generated && generatedContent[f.key] && (
+                      <button onClick={() => handleCopy(f.key, generatedContent[f.key])} style={{ fontSize: 12, color: "#85B7EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>
+                        {copied === f.key ? "✅ Copié !" : "Copier"}
+                      </button>
+                    )
+                  ) : (
+                    <a href="/pricing" style={{ fontSize: 11, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "3px 10px", borderRadius: 6, fontWeight: 500, textDecoration: "none" }}>🔒 Pro</a>
+                  )}
+                </div>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 12 }}>{f.desc}</p>
+                {isPro && generated && generatedContent[f.key] ? (
+                  <pre style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: 14, maxHeight: 180, overflowY: "auto", margin: 0 }}>
+                    {generatedContent[f.key]}
+                  </pre>
+                ) : (
+                  <div>
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 6 }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "60%", marginBottom: 6 }} />
+                    <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "40%" }} />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-          <span style={{ fontSize: 15, fontWeight: 500, color: isPro ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)" }}>{f.label}</span>
-        </div>
-        {isPro ? (
-          generated && generatedContent[f.key] && (
-            <button onClick={() => handleCopy(f.key, generatedContent[f.key])} style={{ fontSize: 12, color: "#85B7EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500 }}>
-              {copied === f.key ? "✅ Copié !" : "Copier"}
-            </button>
-          )
-        ) : (
-          <a href="/pricing" style={{ fontSize: 11, background: "rgba(186,117,23,0.2)", color: "#FAC775", padding: "3px 10px", borderRadius: 6, fontWeight: 500, textDecoration: "none" }}>🔒 Pro</a>
-        )}
-      </div>
-      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 12 }}>{f.desc}</p>
-      {isPro && generated && generatedContent[f.key] ? (
-        <pre style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", whiteSpace: "pre-wrap", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, padding: 14, maxHeight: 180, overflowY: "auto", margin: 0 }}>
-          {generatedContent[f.key]}
-        </pre>
-      ) : (
-        <div>
-          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 6 }} />
-          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "60%", marginBottom: 6 }} />
-          <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "40%" }} />
-        </div>
-      )}
-    </div>
-  ))}
-</div>
         </section>
 
         {/* Bottom bar */}
@@ -273,34 +290,35 @@ export default function Home() {
             Passer à Pro →
           </a>
         </div>
-        
+
         {/* Footer */}
-<div style={{ display: "flex", justifyContent: "center", gap: 32, padding: "24px 48px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-  <a href="/cgu" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"CGU"}</a>
-  <a href="/confidentialite" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"Politique de confidentialité"}</a>
-  <a href="mailto:contact@viralto.fr" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"Contact"}</a>
-  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.2)" }}>{"© 2026 Viralto"}</span>
-</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 32, padding: "24px 48px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+          <a href="/cgu" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"CGU"}</a>
+          <a href="/confidentialite" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"Politique de confidentialité"}</a>
+          <a href="mailto:contact@viralto.fr" style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>{"Contact"}</a>
+          <span style={{ fontSize: 13, color: "rgba(255,255,255,0.2)" }}>{"© 2026 Viralto"}</span>
+        </div>
       </div>
+
       {/* Modal limite atteinte */}
-{showLimitModal && (
-  <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, backdropFilter: "blur(4px)" }}>
-    <div style={{ background: "#0D1117", border: "1px solid rgba(55,138,221,0.3)", borderRadius: 24, padding: 48, maxWidth: 480, width: "90%", textAlign: "center", position: "relative" }}>
-      <button onClick={() => setShowLimitModal(false)} style={{ position: "absolute", top: 16, right: 20, background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: 20, cursor: "pointer" }}>✕</button>
-      <div style={{ fontSize: 48, marginBottom: 16 }}>🚀</div>
-      <h2 style={{ fontSize: 28, fontWeight: 600, marginBottom: 12, letterSpacing: -1 }}>{"Tu as atteint ta limite gratuite"}</h2>
-      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 32 }}>{"Passe à Pro pour des générations illimitées, le Pack hashtags et la Story Instagram — pour seulement 9€/mois."}</p>
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        <a href="/pricing" style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
-          {"Passer à Pro → 9€/mois"}
-        </a>
-        <button onClick={() => setShowLimitModal(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", fontSize: 14, cursor: "pointer" }}>
-          {"Continuer avec le plan gratuit"}
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+      {showLimitModal && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, backdropFilter: "blur(4px)" }}>
+          <div style={{ background: "#0D1117", border: "1px solid rgba(55,138,221,0.3)", borderRadius: 24, padding: 48, maxWidth: 480, width: "90%", textAlign: "center", position: "relative" }}>
+            <button onClick={() => setShowLimitModal(false)} style={{ position: "absolute", top: 16, right: 20, background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: 20, cursor: "pointer" }}>✕</button>
+            <div style={{ fontSize: 48, marginBottom: 16 }}>🚀</div>
+            <h2 style={{ fontSize: 28, fontWeight: 600, marginBottom: 12, letterSpacing: -1 }}>{"Tu as atteint ta limite gratuite"}</h2>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 32 }}>{"Passe à Pro pour des générations illimitées, le Pack hashtags et la Story Instagram — pour seulement 9€/mois."}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <a href="/pricing" style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+                {"Passer à Pro → 9€/mois"}
+              </a>
+              <button onClick={() => setShowLimitModal(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", fontSize: 14, cursor: "pointer" }}>
+                {"Continuer avec le plan gratuit"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
