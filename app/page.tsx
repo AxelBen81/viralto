@@ -281,6 +281,25 @@ export default function Home() {
   <span style={{ fontSize: 13, color: "rgba(255,255,255,0.2)" }}>{"© 2026 Viralto"}</span>
 </div>
       </div>
+      {/* Modal limite atteinte */}
+{showLimitModal && (
+  <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100, backdropFilter: "blur(4px)" }}>
+    <div style={{ background: "#0D1117", border: "1px solid rgba(55,138,221,0.3)", borderRadius: 24, padding: 48, maxWidth: 480, width: "90%", textAlign: "center", position: "relative" }}>
+      <button onClick={() => setShowLimitModal(false)} style={{ position: "absolute", top: 16, right: 20, background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: 20, cursor: "pointer" }}>✕</button>
+      <div style={{ fontSize: 48, marginBottom: 16 }}>🚀</div>
+      <h2 style={{ fontSize: 28, fontWeight: 600, marginBottom: 12, letterSpacing: -1 }}>{"Tu as atteint ta limite gratuite"}</h2>
+      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 32 }}>{"Passe à Pro pour des générations illimitées, le Pack hashtags et la Story Instagram — pour seulement 9€/mois."}</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <a href="/pricing" style={{ background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "14px 28px", borderRadius: 12, fontSize: 16, fontWeight: 500, textDecoration: "none" }}>
+          {"Passer à Pro → 9€/mois"}
+        </a>
+        <button onClick={() => setShowLimitModal(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", fontSize: 14, cursor: "pointer" }}>
+          {"Continuer avec le plan gratuit"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </main>
   );
 }
