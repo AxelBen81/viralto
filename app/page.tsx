@@ -75,7 +75,7 @@ export default function Home() {
       await fetch("/api/generations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: user.id }),
+        body: JSON.stringify({ userId: user.id, url }),
       });
       setGenerations(generations + 1);
       setGenerated(true);
