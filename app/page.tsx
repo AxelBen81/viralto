@@ -181,36 +181,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Pourquoi Viralto */}
-        <section style={{ maxWidth: 960, margin: "0 auto", padding: "64px 48px 0" }}>
-         <div style={{ textAlign: "center", marginBottom: 48 }}>
-  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 16, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "8px 20px", borderRadius: 24, marginBottom: 20 }}>
-    <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
-    Pourquoi Viralto
-  </div>
-  <h2 style={{ fontSize: 48, fontWeight: 600, letterSpacing: -2, lineHeight: 1.1 }}>
-    {"Arrête de perdre du temps"}<br />
-    <span className="gradient-animated">{"à adapter ton contenu"}</span>
-  </h2>
-</div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-            {[
-              { icon: "⏱️", title: "3h économisées par semaine", desc: "Un créateur passe en moyenne 3h à adapter son contenu. Viralto le fait en 30 secondes." },
-              { icon: "🎯", title: "Contenu basé sur ta vidéo", desc: "Chaque résultat est unique et directement tiré de ce que tu as dit dans ta vidéo. Zéro contenu générique." },
-              { icon: "📱", title: "6 formats en un clic", desc: "Instagram, TikTok, X, email, hashtags et Story — tout est prêt à copier-coller directement." },
-              { icon: "🤖", title: "Propulsé par Claude AI", desc: "L'IA la plus avancée du marché analyse ta vidéo et génère du contenu de qualité professionnelle." },
-              { icon: "🔒", title: "Sans engagement", desc: "Plan gratuit pour tester, Pro à 9€/mois sans engagement. Tu annules quand tu veux." },
-              { icon: "🚀", title: "Prêt en 30 secondes", desc: "Colle ton lien, clique sur Générer. Ton kit de contenu complet est prêt avant que tu aies fini ton café." },
-            ].map((item) => (
-              <div key={item.title} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 24 }}>
-                <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
-                <p style={{ fontSize: 16, fontWeight: 600, color: "white", marginBottom: 8 }}>{item.title}</p>
-                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Formats */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "40px 48px 48px" }}>
           <p className="animate-fade-in animate-fade-in-delay-2" style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 20 }}>Contenu généré</p>
@@ -282,6 +252,36 @@ export default function Home() {
                     <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, width: "40%" }} />
                   </div>
                 )}
+              </div>
+            ))}
+          </div>
+        </section>
+        
+        {/* Pourquoi Viralto */}
+        <section style={{ maxWidth: 960, margin: "0 auto", padding: "64px 48px 0" }}>
+         <div style={{ textAlign: "center", marginBottom: 48 }}>
+  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 16, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "8px 20px", borderRadius: 24, marginBottom: 20 }}>
+    <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
+    Pourquoi Viralto
+  </div>
+  <h2 style={{ fontSize: 48, fontWeight: 600, letterSpacing: -2, lineHeight: 1.1 }}>
+    {"Arrête de perdre du temps"}<br />
+    <span className="gradient-animated">{"à adapter ton contenu"}</span>
+  </h2>
+</div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            {[
+              { icon: "⏱️", title: "3h économisées par semaine", desc: "Un créateur passe en moyenne 3h à adapter son contenu. Viralto le fait en 30 secondes." },
+              { icon: "🎯", title: "Contenu basé sur ta vidéo", desc: "Chaque résultat est unique et directement tiré de ce que tu as dit dans ta vidéo. Zéro contenu générique." },
+              { icon: "📱", title: "6 formats en un clic", desc: "Instagram, TikTok, X, email, hashtags et Story — tout est prêt à copier-coller directement." },
+              { icon: "🤖", title: "Propulsé par Claude AI", desc: "L'IA la plus avancée du marché analyse ta vidéo et génère du contenu de qualité professionnelle." },
+              { icon: "🔒", title: "Sans engagement", desc: "Plan gratuit pour tester, Pro à 9€/mois sans engagement. Tu annules quand tu veux." },
+              { icon: "🚀", title: "Prêt en 30 secondes", desc: "Colle ton lien, clique sur Générer. Ton kit de contenu complet est prêt avant que tu aies fini ton café." },
+            ].map((item) => (
+              <div key={item.title} className="card-hover" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 24 }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
+                <p style={{ fontSize: 16, fontWeight: 600, color: "white", marginBottom: 8 }}>{item.title}</p>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>{item.desc}</p>
               </div>
             ))}
           </div>
