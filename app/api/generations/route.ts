@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing env vars" }, { status: 500 });
   }
   const supabase = createClient(supabaseUrl, supabaseKey);
-  const { userId } = await req.json();
+  const { userId, url } = await req.json();
   if (!userId) return NextResponse.json({ error: "Missing userId" }, { status: 400 });
 
   // Vérifier si l'utilisateur est Pro
@@ -57,9 +57,9 @@ export async function POST(req: NextRequest) {
 
   // Si Pro, on enregistre quand même mais sans limite
   const month = getCurrentMonth();
-  const { error } = await supabase
-    .from("generations")
-    .insert({ user_id: userId, month });
+ const { error } = await supabase
+  .from("generations")
+  .insert({ user_id: userId, month, url });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ success: true, is_pro: isPro });
