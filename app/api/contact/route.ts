@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
           <p style="background: #f5f5f5; padding: 16px; border-radius: 8px;">${message}</p>
         </div>
       `,
-      replyTo: email,
+      reply_to: email,
     });
 
     return NextResponse.json({ success: true });
