@@ -173,7 +173,7 @@ export default function Home() {
 
         {/* Stats */}
         <div className="animate-fade-in animate-fade-in-delay-1" style={{ display: "flex", justifyContent: "center", gap: 64, padding: "32px 48px", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", margin: "0 48px" }}>
-          {[["6", "formats générés"], ["30s", "temps moyen"], ["100%", "basé sur ta vidéo"]].map(([num, label]) => (
+         {[["+3h", "économisées par semaine"], ["0,30€", "par jour seulement"], ["YouTube & TikTok", "supportés"]].map(([num, label]) => (
             <div key={label} style={{ textAlign: "center" }}>
               <div style={{ fontSize: 32, fontWeight: 600, color: "white", letterSpacing: -1 }}>{num}</div>
               <div style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", marginTop: 4 }}>{label}</div>
