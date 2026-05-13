@@ -8,7 +8,7 @@ export default function MentionsLegales() {
         {[
           {
             title: "Éditeur du site",
-            content: "Le site viralto.fr est édité par Axel Benmarnia, micro-entrepreneur. SIRET : 880 879 382 00021. Email : contact@viralto.fr"
+            content: "Le site viralto.fr est édité par Axel Benmarnia, micro-entrepreneur. SIRET : 880 879 382 00021. Pays : France. Email : contact@viralto.fr"
           },
           {
             title: "Hébergement",
