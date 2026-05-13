@@ -37,12 +37,6 @@ body {
   .search-bar button { width: 100% !important; border-radius: 12px !important; }
   .grid-why { grid-template-columns: 1fr !important; }
 }
-   
-}
-.search-bar { flex-direction: column !important; border-radius: 16px !important; padding: 12px !important; }
-.search-bar input { width: 100% !important; }
-.search-bar button { width: 100% !important; border-radius: 12px !important; }
-}
 
 @keyframes fadeInUp {
   from {
@@ -74,6 +68,7 @@ body {
 .card-hover {
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
+
 .card-hover:hover {
   transform: translateY(-4px);
   border-color: rgba(55,138,221,0.3) !important;
