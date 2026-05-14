@@ -106,12 +106,12 @@ export default function Home() {
             <a href="/how-it-works" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Comment ça marche</a>
             <a href="/pricing" style={{ fontSize: 16, color: "white", textDecoration: "none", fontWeight: 500 }}>Tarifs</a>
             <SignedOut>
-              <SignInButton mode="modal">
-                <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
-                  Se connecter
-                </button>
-              </SignInButton>
-            </SignedOut>
+  <SignInButton mode="modal">
+    <button style={{ fontSize: 15, color: "white", background: "linear-gradient(135deg, #378ADD, #534AB7)", border: "none", padding: "10px 24px", borderRadius: 24, cursor: "pointer", fontWeight: 500 }}>
+      Essayer gratuitement →
+    </button>
+  </SignInButton>
+</SignedOut>
             <SignedIn>
               <a href="/dashboard" style={{ fontSize: 15, color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>Dashboard</a>
               <UserButton />
