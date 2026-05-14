@@ -129,7 +129,7 @@ export default function Home() {
           </h1>
 
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 48, maxWidth: 560, margin: "0 auto 48px" }}>
-            Transforme n&apos;importe quelle vidéo en kit de contenu complet — caption Instagram, script TikTok, thread X et email en 30 secondes.
+           {"1 vidéo = 6 contenus prêts à publier. Arrête de passer 3h à recycler ton contenu — Viralto le fait en 30 secondes."}
           </p>
 
           <div style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 600, margin: "0 auto 16px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 50, padding: "8px 8px 8px 24px" }} className="search-bar">
@@ -258,11 +258,11 @@ export default function Home() {
          <div style={{ textAlign: "center", marginBottom: 48 }}>
   <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 16, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "8px 20px", borderRadius: 24, marginBottom: 20 }}>
     <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
-    Pourquoi Viralto
+    Pourquoi les créateurs adorent Viralto
   </div>
   <h2 style={{ fontSize: 48, fontWeight: 600, letterSpacing: -2, lineHeight: 1.1 }}>
-    {"Arrête de perdre du temps"}<br />
-    <span className="gradient-animated">{"à adapter ton contenu"}</span>
+   {"Les créateurs qui postent partout"}<br />
+<span className="gradient-animated">{"grandissent 3x plus vite."}</span>
   </h2>
 </div>
          <div className="grid-why" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
