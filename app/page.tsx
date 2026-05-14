@@ -303,7 +303,7 @@ export default function Home() {
           </div>
           <span style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.9)" }}>{f.label}</span>
         </div>
-       pre style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", whiteSpace: "pre-wrap", lineHeight: 1.6, margin: 0 }}>
+       <pre style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", whiteSpace: "pre-wrap", lineHeight: 1.6, margin: 0 }}>
           {f.content}
         </pre>
       </div>
