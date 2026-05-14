@@ -288,9 +288,17 @@ export default function Home() {
           <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>
             {isPro ? "Plan Pro · Générations illimitées 🚀" : `Plan gratuit · ${MAX_FREE - generations} génération${MAX_FREE - generations > 1 ? "s" : ""} restante${MAX_FREE - generations > 1 ? "s" : ""} ce mois`}
           </span>
-          <a href="/pricing" style={{ fontSize: 15, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", borderRadius: 24, textDecoration: "none" }}>
-            Passer à Pro →
-          </a>
+       {!isSignedIn ? (
+  <a href="/" onClick={(e) => { e.preventDefault(); }} style={{ fontSize: 15, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", borderRadius: 24, textDecoration: "none" }}>
+    Essayer gratuitement →
+  </a>
+) : isPro ? (
+  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>Plan Pro actif 🚀</span>
+) : (
+  <a href="/pricing" style={{ fontSize: 15, fontWeight: 500, background: "linear-gradient(135deg, #378ADD, #534AB7)", color: "white", padding: "12px 28px", borderRadius: 24, textDecoration: "none" }}>
+    Passer à Pro →
+  </a>
+)}
         </div>
 
         {/* Footer */}
