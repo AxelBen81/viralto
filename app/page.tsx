@@ -252,64 +252,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        {/* Section Avant/Après */}
-<section style={{ maxWidth: 960, margin: "0 auto", padding: "0 48px 64px" }}>
-  <div style={{ textAlign: "center", marginBottom: 48 }}>
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", border: "1px solid rgba(55,138,221,0.2)", padding: "6px 16px", borderRadius: 24, marginBottom: 16 }}>
-      <div style={{ width: 6, height: 6, background: "#378ADD", borderRadius: "50%", boxShadow: "0 0 6px #378ADD" }} />
-      Exemple réel
-    </div>
-    <h2 style={{ fontSize: 40, fontWeight: 600, letterSpacing: -1, lineHeight: 1.1 }}>
-      {"1 vidéo YouTube"}<br />
-      <span className="gradient-animated">{"→ 6 contenus prêts à publier"}</span>
-    </h2>
-  </div>
-
-  {/* Vidéo source */}
-  <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20, marginBottom: 24, display: "flex", alignItems: "center", gap: 16 }}>
-    <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(226,75,74,0.2)", color: "#F09595", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>▶</div>
-    <div>
-      <p style={{ fontSize: 15, fontWeight: 500, color: "white", marginBottom: 4 }}>{"La théorie des 10 000 heures est FAUSSE"}</p>
-      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>{"Vidéo YouTube · analysée en 28 secondes par Viralto"}</p>
-    </div>
-    <div style={{ marginLeft: "auto", fontSize: 13, color: "#85B7EB", background: "rgba(55,138,221,0.1)", padding: "4px 12px", borderRadius: 20 }}>✓ Analysée</div>
-  </div>
-
-  {/* Outputs */}
-  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
-    {[
-      {
-        icon: "ig", label: "Caption Instagram", color: "#85B7EB", bg: "rgba(55,138,221,0.2)",
-        content: `🚨 VOUS PERDEZ DU TEMPS À APPRENDRE 🚨\n\nLa vérité : Vous n'avez pas besoin de 10 000 heures pour maîtriser une nouvelle compétence.\n\n20 heures de pratique CONCENTRÉE = vous passez de zéro à compétent.\n\n40 minutes par jour pendant un mois suffit.\n\nSauve ce post 👇\n\n#ApprentissageRapide #DéveloppementPersonnel`
-      },
-      {
-        icon: "tt", label: "Script TikTok", color: "#F09595", bg: "rgba(226,75,74,0.2)",
-        content: `[0-3s] 🔥 La théorie du 10 000 heures ? C'est FAUX.\n\n[3-15s] Josh Kaufman a découvert que 20 heures de pratique CONCENTRÉE vous rendent compétent dans PRESQUE N'IMPORTE QUOI.\n\n[15-25s] Le truc secret : déconstruisez la compétence en sous-compétences.\n\n[25-30s] Commence aujourd'hui. 40 min/jour. 1 mois. →`
-      },
-      {
-        icon: "x", label: "Thread X", color: "#C0DD97", bg: "rgba(99,153,34,0.2)",
-        content: `1/ La majorité des gens croit que vous avez besoin de 10 000 heures pour maîtriser une compétence. C'est faux.\n\n2/ Josh Kaufman a prouvé que 20 heures de pratique CONCENTRÉE vous transforment de zéro en compétent. 40 min/jour pendant 1 mois.\n\n3/ Le secret ? La DÉCONSTRUCTION. Maîtrisez 5-10 sous-compétences clés. C'est tout.`
-      },
-      {
-        icon: "@", label: "Email newsletter", color: "#FAC775", bg: "rgba(186,117,23,0.2)",
-        content: `Objet : 20 heures pour changer votre vie (pas 10 000)\n\nBonjour,\n\nVous voulez apprendre le piano ? Le code ? La photographie ?\n\nVous avez probablement entendu que ça prend 10 000 heures. C'est faux.\n\nJosh Kaufman a prouvé : 20 heures suffisent pour passer de zéro à compétent.`
-      },
-    ].map((f) => (
-      <div key={f.label} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: 20 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: f.bg, color: f.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600 }}>
-            {f.icon}
-          </div>
-          <span style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.9)" }}>{f.label}</span>
-        </div>
-       <pre style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", whiteSpace: "pre-wrap", lineHeight: 1.6, margin: 0 }}>
-          {f.content}
-        </pre>
-      </div>
-    ))}
-  </div>
-</section>
         
         {/* Pourquoi Viralto */}
         <section style={{ maxWidth: 960, margin: "0 auto", padding: "24px 48px 24" }}>
